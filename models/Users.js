@@ -29,16 +29,9 @@ var userSchema = new mongoose.Schema({
         required:true,
     },
     status:{
-        type: Number,
-        default : 0
-    },
-    groupId:{
-        type:Number,
-        required:true,
-    },
-    roleName:{
-        type:String
-    },
+        type: String,
+        required : true
+    }
 });
 
 //Export the model
