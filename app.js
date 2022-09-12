@@ -25,11 +25,12 @@ app.get('/', (req, res) => {
     res.send("Hello Express.js");
 })
 
-// ----------------------middlewares---------------
+// ----------------------middleware cors---------------
 app.use(cors(
     {
         origin: 'http://localhost:3000',
-        optionsSuccessStatus: 200
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        optionsSuccessStatus: 204
     }
 ));
 
