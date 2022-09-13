@@ -7,7 +7,7 @@ var ProjectSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    projectId: {
+    searchObject: {
         type: String,
         required: true,
         unique: true
