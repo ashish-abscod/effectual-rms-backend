@@ -1,8 +1,8 @@
-const Projects = require('../models/projects.model');
+const projects = require('../models/projects.model');
 
 exports.getProjects = async (req, res) => { 
     try{
-        const data = await Projects.find();
+        const data = await projects.find();
         res.json(data);
     }catch(e){
         res.send("Error - " + e);
@@ -11,12 +11,12 @@ exports.getProjects = async (req, res) => {
 
 
 exports.createProject = async (req, res) => {
-    const projects = Projects({
+    const data = projects({
         refId : req.body.refId,
         projectId : req.body.projectId
     })
     try {
-        const savedProject = await projects.save();
+        const savedProject = await data.save();
         res.json(savedProject);
     } catch (e) {
         res.send("Error - " + e)

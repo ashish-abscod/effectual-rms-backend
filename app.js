@@ -4,7 +4,8 @@ const mongoose = require('mongoose');  //mongoose for connection
 require('dotenv/config');   //config file
 const bodyParser = require('body-parser');  //used to parse the requested data body
 app.use(bodyParser.json());   //this will parse the body recieved from req object in json format.
-const Projects = require('./routes/Projects.route')
+const projects = require('./routes/projects.route');
+const users = require('./routes/users.route');
 const cors = require('cors');
 
 //---------------Mongodb Connection -----------------
@@ -34,7 +35,8 @@ app.use(cors(
     }
 ));
 
-app.use('/projects', Projects)
+app.use('/projects', projects);
+app.use('/users', users);
 
 const Port = process.env.port;
 app.listen(Port, () => {
