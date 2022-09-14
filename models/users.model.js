@@ -2,18 +2,12 @@ const mongoose = require("mongoose"); // Erase if already required
 
 // Declare the Schema of the Mongo model
 var userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-    default: "demo",
-  },
   password: {
     type: String,
     required: true,
   },
   name: {
-    type: String,
-    required: true,
+    type: String
   },
   email: {
     type: String,
