@@ -1,10 +1,13 @@
-const router = require('express').Router();
-const { createProject, getProjects,bcryptPassword } = require('../controllers/projects.controller');
+const router = require("express").Router();
+const {
+  createProject,
+  getProjects,
+  updateProject,
+} = require("../controllers/projects.controller");
 
-router.get('/', getProjects)
+router.get("/", getProjects);
 
-router.put('/bcryptPassword', bcryptPassword)
-
-router.post('/',createProject)
+router.post("/create", createProject);
+router.put("/updates/:id", updateProject);
 
 module.exports = router;
