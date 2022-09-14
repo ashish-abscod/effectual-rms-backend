@@ -2,20 +2,14 @@ const bcrypt = require("bcryptjs");
 const UsersModel = require("../models/users.model");
 
 exports.createUser = async (req, res) => {
-  const data = UsersModel({
-    username: req.body.username,
-    password: bcrypt.hashSync(req.body.password, 10),
-    name: req.body.name,
-    email: req.body.email,
-    role: req.body.role,
-    status: req.body.status,
-  });
-  try {
-    const savedUser = await data.save();
-    res.json({ message: "User was registered successfully!" });
-    res.send(data);
-  } catch (error) {}
-};
+    const data = UsersModel({
+        username : req.body.username,
+        password : req.body.password,
+        name : req.body.name,
+        email : req.body.email,
+        role : req.body.role,
+        status : req.body.status
+    })
 
 exports.getUser = async (req, res) => {
   let item = await UsersModel.find();
@@ -34,4 +28,4 @@ exports.deleteUser = async (req, res) => {
   );
   res.send(result);
   console.log(req.params.id);
-};
+}}
