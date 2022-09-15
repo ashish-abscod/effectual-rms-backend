@@ -14,18 +14,10 @@ const authentication = async (req, res, next) => {
     }
 
     try {
-      const decode = await jwt.verify(token, process.env.SUPER_SECRET_KEY);
-
-      //finding user details with decoded _id and appending details in req for usage as session.
-      const user = await users.findOne({ _id: decode._id });
-
-      if (!user) {
-        res.json({ Message: "Invalid User", code: 404 });
-      }
-      req.user = user;
+      await jwt.verify(token, process.env.SUPER_SECRET_KEY);
       next();
     } catch (e) {
-      res.json({ Message: "Unauthorized", code : 401 })
+      res.json({ Message: "Unauthorized Token Provided", code : 401 })
     }
   }
   catch (error) {
