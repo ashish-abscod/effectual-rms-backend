@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 const projects = require("./routes/projects.route");
 const users = require("./routes/users.route");
 const feedback = require("./routes/feedback.route");
-const auth = require("./routes/auth.route");
+const signIn = require("./routes/signIn.route");
 const authentication = require('./middlewares/auth.mw')
 
 //---------------Mongodb Connection -----------------
@@ -41,10 +41,10 @@ app.use(
   })
 );
 
-app.use('/projects', projects);
+app.use('/projects', authentication, projects);
 app.use('/users', authentication, users);
 app.use("/feedback", feedback);
-app.use("/auth", auth);
+app.use("/signin", signIn);
 
 
 const Port = process.env.port;
