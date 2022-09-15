@@ -32,7 +32,8 @@ try{
    }
 }
 
-exports.getUser = async (req, res) => {
+
+exports.getUsers = async (req, res) => {
   let item = await UsersModel.find();
   if (item.length > 0) {
     res.send(item);

@@ -3,8 +3,7 @@ const {createUser,getUser,deleteUser} = require("../controllers/users.controller
 
 
 router.post("/", createUser);
-router.get("/", getUser);
+router.get("/", getUsers);
 router.put("/:id", deleteUser);
-
 
 module.exports = router;
