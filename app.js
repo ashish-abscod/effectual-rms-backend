@@ -10,6 +10,7 @@ const projects = require("./routes/projects.route");
 const users = require("./routes/users.route")
 const feedback = require("./routes/feedback.route");
 // const files = require("./routes/files.route");
+const signIn = require("./routes/signIn.route")
 
 //---------------Mongodb Connection -----------------
 mongoose.Promise = global.Promise;
