@@ -1,14 +1,14 @@
-const router = require('express').Router();
-const multer = require('multer');
-const { uploadProfile } = require('../controllers/files.controller');
+// const router = require('express').Router();
+// const multer = require('multer');
+// const { uploadProfile } = require('../controllers/files.controller');
 
 
-const storage = multer.diskStorage({})
+// const storage = multer.diskStorage({})
 
-let upload = multer({
-    storage
-})
+// let upload = multer({
+//     storage
+// })
 
-router.post("/profile", upload.single("myImage"), uploadProfile);
+// router.post("/profile", upload.single("myImage"), uploadProfile);
 
-module.exports = router;
+// module.exports = router;

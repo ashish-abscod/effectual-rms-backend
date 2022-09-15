@@ -10,14 +10,13 @@
 //         try{
 //         data.map(async (item)=> {
 //             let newPassword = await bcrypt.hashSync(item.password, 10);
-//             return await usersModel.findByIdAndUpdate(item._id, {password : newPassword},function (err,docs) {
+//                 await usersModel.findByIdAndUpdate(item._id, {password : newPassword},function (err,docs) {
 //                 if (err){
 //                     console.log(err)
 //                 }
 //                 else{
 //                     console.log("Updated Password for  : ", docs);
 //                 }} )
-//             console.log("Updated Password for id - " + item._id);
 //         })
 //         res.json("Successfully updated passwords.");
 //         return;
