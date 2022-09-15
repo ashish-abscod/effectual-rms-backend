@@ -7,9 +7,9 @@ const bodyParser = require("body-parser"); //used to parse the requested data bo
 app.use(bodyParser.json()); //this will parse the body recieved from req object in json format.
 app.use(bodyParser.urlencoded({extended: true}));
 const projects = require("./routes/projects.route");
-const users = require("./routes/users.route");
+const users = require("./routes/users.route")
 const feedback = require("./routes/feedback.route");
-const files = require("./routes/files.route");
+// const files = require("./routes/files.route");
 
 //---------------Mongodb Connection -----------------
 mongoose.Promise = global.Promise;
@@ -34,15 +34,16 @@ app.get("/", (req, res) => {
 // ----------------------middleware cors---------------
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     optionsSuccessStatus: 204,
   })
 );
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 
 app.use('/projects', projects);
 app.use('/users', users);
-app.use('/uploads', files)
+// app.use('/uploads', files)
 app.use("/feedback", feedback);
 
 
