@@ -1,16 +1,16 @@
 const express = require("express");
-const app = express(); 
+const app = express();
 const mongoose = require("mongoose");
 require("dotenv/config");
-const cors = require('cors');
+const cors = require("cors");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 const projects = require("./routes/projects.route");
 const users = require("./routes/users.route");
 const feedback = require("./routes/feedback.route");
 const signIn = require("./routes/signIn.route");
-const authentication = require('./middlewares/auth.mw')
+const authentication = require("./middlewares/auth.mw");
 
 //---------------Mongodb Connection -----------------
 mongoose.Promise = global.Promise;
@@ -41,11 +41,10 @@ app.use(
   })
 );
 
-app.use('/projects', authentication, projects);
-app.use('/users', authentication, users);
+app.use("/projects", authentication, projects);
+app.use("/users", authentication, users);
 app.use("/feedback", feedback);
 app.use("/signin", signIn);
-
 
 const Port = process.env.port;
 app.listen(Port, () => {
