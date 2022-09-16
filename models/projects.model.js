@@ -2,7 +2,7 @@ const mongoose = require("mongoose"); // Erase if already required
 
 // Declare the Schema of the Mongo model
 var ProjectSchema = new mongoose.Schema({
-  refId: {
+  projectId: {
     type: String,
     required: true,
     unique: true,

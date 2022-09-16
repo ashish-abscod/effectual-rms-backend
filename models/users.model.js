@@ -7,7 +7,7 @@ var userSchema = new mongoose.Schema({
     required: true,
   },
   name: {
-    type: String
+    type: String,
   },
   email: {
     type: String,
@@ -17,6 +17,7 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
   status: {
     type: String,
     default: "Active",
