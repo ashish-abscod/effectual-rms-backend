@@ -41,7 +41,7 @@ app.use(
   })
 );
 
-app.use('/projects', authentication, projects);
+app.use('/projects', projects);
 app.use('/users', authentication, users);
 app.use("/feedback", feedback);
 app.use("/signin", signIn);
