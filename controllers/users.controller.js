@@ -1,6 +1,8 @@
 const bcrypt = require("bcryptjs");
 const UsersModel = require("../models/users.model");
 const {cloudinary} = require("../controllers/files.controller");
+const jwt = require("jsonwebtoken");
+const usersModel = require("../models/users.model");
 
 exports.createUser = async (req, res) => {
 try{
@@ -51,3 +53,35 @@ exports.deleteUser = async (req, res) => {
   res.send(result);
   console.log(req.params.id);
 }
+
+exports.SearchUser = async (req, res) => {
+  let result = await UsersModel.find({
+    $or: [{ name: { $regex: req.params.key } }],
+  });
+  res.send(result);
+};
+
+exports.getForgotPassWord = async (req,res) => {
+
+}
+
+exports.postCreatePassWord = async (req,res) => {
+
+const {email} = req.body;
+
+if(email !== usersModel.email){
+  
+}
+
+
+}
+
+
+exports.getCreatedPassword = async(req,res) => {
+
+}
+
+exports.postResetPassWord = async (req,res) => {
+
+}
+

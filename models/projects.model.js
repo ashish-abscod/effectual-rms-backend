@@ -80,7 +80,7 @@ var ProjectSchema = new mongoose.Schema({
     type: String,
   },
   attachment: {
-    type: Array,
+    type: String,
   },
 });
 
