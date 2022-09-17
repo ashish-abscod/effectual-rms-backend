@@ -61,7 +61,7 @@ var ProjectSchema = new mongoose.Schema({
   include: {
     type: String,
   },
-  title: {
+  technicalField: {
     type: String,
   },
   standard: {
@@ -77,6 +77,9 @@ var ProjectSchema = new mongoose.Schema({
     type: String,
   },
   nonImpClaim: {
+    type: String,
+  },
+  attachment: {
     type: String,
   },
 });

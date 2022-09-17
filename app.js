@@ -7,11 +7,13 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const projects = require("./routes/projects.route");
-const users = require("./routes/users.route");
+const users = require("./routes/users.route")
 const feedback = require("./routes/feedback.route");
+// const files = require("./routes/files.route");
 const signIn = require("./routes/signIn.route");
 // const authentication = require("./middlewares/auth.mw");
 // const { MongoClient } = require("mongodb");
+const nodemailer = require('nodemailer');
 
 //---------------Mongodb Connection -----------------
 mongoose.Promise = global.Promise;
@@ -36,16 +38,51 @@ app.get("/", (req, res) => {
 // ----------------------middleware cors---------------
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     optionsSuccessStatus: 204,
   })
 );
 
+// node-mailer
+// let transport = nodemailer.createTransport({
+//   host: 'smtp.mailtrap.io',
+//   port: 2525,
+//   auth: {
+//     user: "bandanasatpathy435@gmail.com",
+//     pass: 'badili123'
+//   }
+// });
+
+// const mailOptions = {
+//   from: 'tamannabajaj80@gmail.com', // Sender address
+//   to: 'bandanasatpathy435@gmail.com', // List of recipients
+//   subject: 'Node Mailer', // Subject line
+//   text: 'Hello People!, Welcome to Bacancy!', // Plain text body
+// };
+
+// transport.sendMail(mailOptions, function(err, info) {
+//  if (err) {
+//    console.log(err)
+//  } else {
+//    console.log(info)
+// ;
+//  }
+// });
+
+
+
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
+app.use(bodyParser.urlencoded({ extended:false }))
+app.use(bodyParser.json())
+
 app.use('/projects', projects);
 app.use('/users', users);
+// app.use('/uploads', files)
 app.use("/feedback", feedback);
 app.use("/signin", signIn);
+
+
 
 const Port = process.env.port;
 app.listen(Port, () => {
