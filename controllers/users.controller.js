@@ -40,3 +40,11 @@ exports.SearchUser = async (req, res) => {
   });
   res.send(result);
 };
+exports.getUserName = async (req, res) => {
+  let item = await UsersModel.find({}, { name: 1, _id: 0 });
+  if (item.length > 0) {
+    res.send(item);
+  } else {
+    res.send({ result: "data not found" });
+  }
+};
