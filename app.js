@@ -42,7 +42,7 @@ app.use(
 );
 
 app.use('/projects', projects);
-app.use('/users', authentication, users);
+app.use('/users', users);
 app.use("/feedback", feedback);
 app.use("/signin", signIn);
 
