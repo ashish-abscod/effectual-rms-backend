@@ -8,7 +8,7 @@ const feedbackSchema = new mongoose.Schema({
   projectId: {
     type: String,
   },
-  UserEmail: {
+  userId: {
     type: String,
   },
 });
