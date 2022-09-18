@@ -1,4 +1,4 @@
-const feedbackModel = require("../models/Feedback.model");
+const feedbackModel = require("../models/Feedbacks.model");
 
 exports.createFeedback = async (req, res) => {
   let add = new feedbackModel(req.body);
