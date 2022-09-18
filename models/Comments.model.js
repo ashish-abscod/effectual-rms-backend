@@ -19,9 +19,6 @@ userName : {
 },
 userRole : {
     type : String
-},
-userRole : {
-    type : String
 }
 
 })
