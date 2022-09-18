@@ -1,5 +1,5 @@
-const projectModel = require("../models/projects.model");
-const {cloudinary} = require("../controllers/files.controller");
+const projectModel = require("../models/Projects.model");
+const {cloudinary} = require("./Files.controller");
 
 exports.getProjects = async (req, res) => {
   try {
