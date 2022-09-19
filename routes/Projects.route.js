@@ -8,6 +8,6 @@ const {
 router.get("/", getProjects);
 
 router.post("/create", createProject);
-router.put("/updates/:id", updateProject);
+router.put("/update/:id", updateProject);
 
 module.exports = router;
