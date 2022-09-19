@@ -6,8 +6,7 @@ const {
 } = require("../controllers/Projects.controller");
 
 router.get("/", getProjects);
-
 router.post("/create", createProject);
-router.put("/updates/:id", updateProject);
+router.put("/update/:id", updateProject);
 
 module.exports = router;
