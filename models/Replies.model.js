@@ -21,4 +21,4 @@ userRole : {
 })
 
 //pass third argument as schema name if exactly what you want
-module.exports = mongoose.model("Comments", commentSchema, "Comments");
+module.exports = mongoose.model("Replies", commentSchema, "Replies");
