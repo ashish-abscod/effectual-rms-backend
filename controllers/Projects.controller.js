@@ -10,6 +10,15 @@ exports.getProjects = async (req, res) => {
   }
 };
 
+exports.getOneProject = async (req, res) => {
+  try {
+    const data = await projectModel.findOne({projectId : req.params.id});
+    res.json(data);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
 exports.createProject = async (req, res) => {
   try {
     // const uploadResponse = await cloudinary.uploader.upload(
@@ -54,11 +63,38 @@ exports.createProject = async (req, res) => {
 };
 
 exports.updateProject = async (req, res) => {
-  const result = await projectModel.updateOne(
-    { _id: req.params.id },
-
-    { $set: req.body }
+  try{
+  console.log(req.body)
+  const result = await projectModel.findOneAndUpdate({projectId : req.params.id},
+    {
+      searchObject: req.body.SearchObject,
+      claims: req.body.ClaimsToBeSearched,
+      reqDelivery: req.body.RequirementForDelivery,
+      projectName: req.body.ProjectName,
+      requesterName: req.body.requesterName,
+      deliveryDate: req.body.RequirementDeliveryDate,
+      priorArtDate: req.body.PriorArtCuttOffDate,
+      emailContent: req.body.EmailContent,
+      info: req.body.UsefulInformationForSearch,
+      status: req.body.Status,
+      projectManager: req.body.ProjectManager,
+      requestedDate: req.body.RequestedDate,
+      patentNumber: req.body.PatentNumber,
+      createdById: req.body.CreatedById,
+      completedDate: req.body.CompletedDate,
+      jurisdiction: req.body.Jurisdiction,
+      include: req.body.Include,
+      technicalField: req.body.TechnicalField,
+      standard: req.body.StandardRelated,
+      sso: req.body.SSONeeded,
+      usipr: req.body.USIPRSpecial,
+      impClaim: req.body.ImportantClaims,
+      nonImpClaim: req.body.UnimportantClaims
+    }
   );
-  res.send(result);
-  console.log(req.params.id);
+  res.send({Message:"Successfully updated project!", code : 200});
+  }
+  catch(err){
+    res.send(err)
+  }
 };
