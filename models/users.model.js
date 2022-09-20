@@ -1,7 +1,8 @@
 const mongoose = require("mongoose"); // Erase if already required
 
 // Declare the Schema of the Mongo model
-var userSchema = new mongoose.Schema({
+const  userSchema = new mongoose.Schema({
+
   password: {
     type: String,
     required: true,
@@ -18,8 +19,9 @@ var userSchema = new mongoose.Schema({
     required: true,
   },
   status: {
-    type: String,
-    default: "Active",
+    type: Boolean,
+    default:true
+    
   },
   picture: {
     type: String,

@@ -1,8 +1,8 @@
 const mongoose = require("mongoose"); // Erase if already required
 
 // Declare the Schema of the Mongo model
-var ProjectSchema = new mongoose.Schema({
-  refId: {
+const projectSchema = new mongoose.Schema({
+  projectId: {
     type: String,
     required: true,
     unique: true,
@@ -85,4 +85,4 @@ var ProjectSchema = new mongoose.Schema({
 });
 
 //pass third argument as schema name if exactly what you want
-module.exports = mongoose.model("Projects", ProjectSchema, "Projects");
+module.exports = mongoose.model("Projects", projectSchema, "Projects");

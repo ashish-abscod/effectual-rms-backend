@@ -3,7 +3,7 @@ const {
   createProject,
   getProjects,
   updateProject,
-} = require("../controllers/projects.controller");
+} = require("../controllers/Projects.controller");
 
 router.get("/", getProjects);
 

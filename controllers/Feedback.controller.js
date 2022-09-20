@@ -1,7 +1,7 @@
-const feedback = require("../models/feedback.model");
+const feedbackModel = require("../models/Feedbacks.model");
 
 exports.createFeedback = async (req, res) => {
-  let add = new feedback(req.body);
+  let add = new feedbackModel(req.body);
   let result = await add.save();
   res.send(result);
 };
