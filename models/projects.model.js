@@ -4,8 +4,8 @@ const mongoose = require("mongoose"); // Erase if already required
 const projectSchema = new mongoose.Schema({
   projectId: {
     type: String,
-    required: true,
-    unique: true,
+    // required: true,
+    // unique: true,
   },
   searchObject: {
     type: String,
@@ -20,6 +20,7 @@ const projectSchema = new mongoose.Schema({
   },
   projectName: {
     type: String,
+    default: "Invalidity Search",
   },
   requesterName: {
     type: String,
@@ -41,7 +42,7 @@ const projectSchema = new mongoose.Schema({
   },
   projectManager: {
     type: String,
-    required: true,
+    default: "Amit Goel",
   },
   requestedDate: {
     type: String,
