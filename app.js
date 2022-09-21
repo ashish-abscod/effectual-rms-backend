@@ -11,6 +11,7 @@ const users = require("./routes/users.route")
 const feedback = require("./routes/feedback.route");
 // const files = require("./routes/files.route");
 const signIn = require("./routes/signIn.route");
+const comment = require("./routes/comments.route")
 // const authentication = require("./middlewares/auth.mw");
 // const { MongoClient } = require("mongodb");
 // const nodemailer = require('nodemailer');
@@ -44,31 +45,6 @@ app.use(
   })
 );
 
-// node-mailer
-// let transporter = nodemailer.createTransport({
-//   host: 'smtp.gmail.com',
-//   post: 587,
-//   secure: false,
-//   requireTLS: true,
-//   auth:{
-//     user:'tamanna.bajaj@abscod.com',
-//     pass:""
-//   }
-
-// })
-// let mailOptions ={
-//   from :'tamanna.bajaj@abscod.com',
-//   to :'mayank.chaturvedi@abscod.com',
-//   subject :"mail tester",
-//   Text:"hello yooooo "
-// }
-// transporter.sendMail(mailOptions,function(err,info){
-//   if(err){
-//     console.log(err);
-//   }else{
-//     console.log("email has been sent successfully",info.response);
-//   }
-// })
 
 
 
@@ -81,6 +57,7 @@ app.use('/users', users);
 // app.use('/uploads', files)
 app.use("/feedback", feedback);
 app.use("/signin", signIn);
+app.use("/comment",comment)
 
 
 
