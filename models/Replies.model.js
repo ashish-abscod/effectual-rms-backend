@@ -2,6 +2,9 @@ const mongoose = require("mongoose");   //Erase if already required
 
 const replieSchema = new mongoose.Schema({
 
+    projectId : {
+        type : String
+    },
     commentId: {
         type: String
     },
