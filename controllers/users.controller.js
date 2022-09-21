@@ -59,7 +59,6 @@ exports.deleteUser = async (req, res) => {
     { $set: { status: false } }
   );
   res.send(result);
-
 }
 
 exports.SearchUser = async (req, res) => {
