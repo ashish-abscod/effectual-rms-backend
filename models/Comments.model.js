@@ -29,9 +29,9 @@ const commentSchema = new mongoose.Schema({
 
 //virtual population for Replies
 
-commentSchema.virtual('replies', {
+commentSchema.virtual('myReplies', {
     ref : 'Replies',
-    foreignField : 'comment',
+    foreignField : 'commentId',
     localField : 'commentId'
 });
 
