@@ -46,30 +46,30 @@ app.use(
 );
 
 // node-mailer
-// let transport = nodemailer.createTransport({
-//   host: 'smtp.mailtrap.io',
-//   port: 2525,
-//   auth: {
-//     user: "bandanasatpathy435@gmail.com",
-//     pass: 'badili123'
+// let transporter = nodemailer.createTransport({
+//   host: 'smtp.gmail.com',
+//   post: 587,
+//   secure: false,
+//   requireTLS: true,
+//   auth:{
+//     user:'tamanna.bajaj@abscod.com',
+//     pass:""
 //   }
-// });
 
-// const mailOptions = {
-//   from: 'tamannabajaj80@gmail.com', // Sender address
-//   to: 'bandanasatpathy435@gmail.com', // List of recipients
-//   subject: 'Node Mailer', // Subject line
-//   text: 'Hello People!, Welcome to Bacancy!', // Plain text body
-// };
-
-// transport.sendMail(mailOptions, function(err, info) {
-//  if (err) {
-//    console.log(err)
-//  } else {
-//    console.log(info)
-// ;
-//  }
-// });
+// })
+// let mailOptions ={
+//   from :'tamanna.bajaj@abscod.com',
+//   to :'mayank.chaturvedi@abscod.com',
+//   subject :"mail tester",
+//   Text:"hello yooooo "
+// }
+// transporter.sendMail(mailOptions,function(err,info){
+//   if(err){
+//     console.log(err);
+//   }else{
+//     console.log("email has been sent successfully",info.response);
+//   }
+// })
 
 
 

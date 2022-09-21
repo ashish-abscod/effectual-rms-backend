@@ -19,8 +19,9 @@ const  userSchema = new mongoose.Schema({
     required: true,
   },
   status: {
-    type: String,
-    default: "Active",
+    type: Boolean,
+    default:true
+    
   },
   picture: {
     type: String,
