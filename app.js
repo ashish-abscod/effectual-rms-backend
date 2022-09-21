@@ -7,13 +7,14 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const projects = require("./routes/projects.route");
-const users = require("./routes/users.route")
+const users = require("./routes/users.route");
 const feedback = require("./routes/feedback.route");
 // const files = require("./routes/files.route");
 const signIn = require("./routes/signIn.route");
 // const authentication = require("./middlewares/auth.mw");
 // const { MongoClient } = require("mongodb");
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
+const assignedUsers = require("./routes/AssignedUsers");
 
 //---------------Mongodb Connection -----------------
 mongoose.Promise = global.Promise;
@@ -70,19 +71,22 @@ app.use(
 //  }
 // });
 
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
-app.use(bodyParser.urlencoded({ extended:false }))
-app.use(bodyParser.json())
-
-app.use('/projects', projects);
-app.use('/users', users);
+app.use("/projects", projects);
+app.use("/users", users);
 // app.use('/uploads', files)
 app.use("/feedback", feedback);
 app.use("/signin", signIn);
-
-
+app.use("/assigned", assignedUsers);
 
 const Port = process.env.port;
 app.listen(Port, () => {

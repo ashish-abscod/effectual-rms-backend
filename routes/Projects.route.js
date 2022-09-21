@@ -9,5 +9,4 @@ const {
 router.get("/", getProjects);
 router.post("/create", createProject);
 router.put("/update/:id", updateProject);
-router.get("/:id",getOneProject)
 module.exports = router;
