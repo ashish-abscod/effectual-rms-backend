@@ -14,6 +14,7 @@ const signIn = require("./routes/signIn.route");
 // const authentication = require("./middlewares/auth.mw");
 // const { MongoClient } = require("mongodb");
 const nodemailer = require('nodemailer');
+const discussion = require("./routes/Discussion");
 
 //---------------Mongodb Connection -----------------
 mongoose.Promise = global.Promise;
@@ -78,9 +79,9 @@ app.use(bodyParser.json())
 
 app.use('/projects', projects);
 app.use('/users', users);
-// app.use('/uploads', files)
 app.use("/feedback", feedback);
 app.use("/signin", signIn);
+app.use("/discussion", discussion);
 
 
 
