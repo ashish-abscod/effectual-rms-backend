@@ -1,24 +1,27 @@
 const mongoose = require("mongoose");   //Erase if already required
 
-const commentSchema = new mongoose.Schema({
+const replieSchema = new mongoose.Schema({
 
-commentId : {
-    type : String
+    commentId: {
+        type: String
+    },
+    replie: {
+        type: String
+    },
+    time: {
+        type: String
+    },
+    userName: {
+        type: String
+    },
+    userRole: {
+        type: String
+    }
 },
-replie : {
-    type : String
-},
-time : {
-    type : String
-},
-userName : {
-    type : String
-},
-userRole : {
-    type : String
-}
-
-})
+    {
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true }
+    });
 
 //pass third argument as schema name if exactly what you want
-module.exports = mongoose.model("Comments", commentSchema, "Comments");
+module.exports = mongoose.model("Replies", replieSchema, "Replies");

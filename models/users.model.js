@@ -1,14 +1,13 @@
 const mongoose = require("mongoose"); // Erase if already required
 
 // Declare the Schema of the Mongo model
-const  userSchema = new mongoose.Schema({
-
+const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
   },
   name: {
-    type: String
+    type: String,
   },
   email: {
     type: String,
@@ -25,7 +24,7 @@ const  userSchema = new mongoose.Schema({
   },
   picture: {
     type: String,
-  }
+  },
 });
 
 //Export the model

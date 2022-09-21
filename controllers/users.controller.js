@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const usersModel = require("../models/Users.model");
 const { cloudinary } = require("./Files.controller");
 const jwt = require("jsonwebtoken");
+const UsersModel = require("../models/Users.model");
 
 exports.createUser = async (req, res) => {
   try {
@@ -40,9 +41,9 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.getUsersById = async (req, res) => {
-  const result = await usersModel.findOne({ _id: req.params.id });
+  const result = await usersModel.findOne({ _id: req.params.id })
   if (result) {
-    res.send(result);
+    res.send(result)
   } else {
     res.send({ result: "data not found" });
   }
@@ -64,23 +65,17 @@ exports.SearchUser = async (req, res) => {
   res.send(result);
 };
 
-exports.getUserName = async (req, res) => {
-  let item = await usersModel.find({}, { name: 1, _id: 0 });
-  if (item.length > 0) {
-    res.send(item);
-  } else {
-    res.send({ result: "data not found" });
-  }
-};
-
 exports.updateUser = async (req, res) => {
   try {
     const _id = req.params.id;
     const updatedData = req.body;
-    const result = await usersModel.findByIdAndUpdate(_id, updatedData);
+    const result = await usersModel.findByIdAndUpdate(
+      _id, updatedData
+    )
 
-    res.send(result);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.send(result)
+  }
+  catch (error) {
+    res.status(400).json({ message: error.message })
   }
 };
