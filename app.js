@@ -10,7 +10,8 @@ const projects = require("./routes/projects.route");
 const users = require("./routes/users.route");
 const feedback = require("./routes/feedback.route");
 const signIn = require("./routes/signIn.route");
-const comment = require("./routes/comments.route")
+const comment = require("./routes/comments.route");
+const replie = require("./routes/Replies.route");
 // const authentication = require("./middlewares/auth.mw");
 const discussion = require("./routes/Discussion");
 const assignedUsers = require("./routes/AssignedUsers");
@@ -44,31 +45,33 @@ app.use(
   })
 );
 
-
 app.use(
   bodyParser.urlencoded({
-    limit: "50mb",
+    limit: "50MB",
     extended: true,
     parameterLimit: 50000,
   })
 );
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
+app.use(
+  bodyParser.urlencoded({
+    limit: "50MB",
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
 
-
-app.use('/projects', projects);
-app.use('/users', users);
+app.use("/projects", projects);
+app.use("/users", users);
 app.use("/feedback", feedback);
 app.use("/signin", signIn);
-app.use("/comment",comment)
-
+app.use("/comment", comment);
+app.use("/replie", replie);
 app.use("/discussion", discussion);
 app.use("/assigned", assignedUsers);
-
 
 const Port = process.env.port;
 app.listen(Port, () => {
   console.log(`Server is listening on port ${Port}`);
 });
-
