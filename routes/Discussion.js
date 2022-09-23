@@ -1,6 +1,6 @@
-const { getDiscussion } = require('../controllers/Discussion');
+const { getDiscussion } = require("../controllers/Discussion");
 
-const router = require('express').Router();
+const router = require("express").Router();
 
 router.get("/:projectId", getDiscussion);
 

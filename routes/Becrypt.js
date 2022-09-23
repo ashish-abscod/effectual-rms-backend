@@ -24,7 +24,6 @@
 //         res.json(err);
 //     }
 
-
 //     } catch (error) {
 //         console.log({message : error})
 //     }

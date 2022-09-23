@@ -10,6 +10,8 @@ const feedback = require("./routes/feedback.route");
 const signIn = require("./routes/signIn.route");
 const comment = require("./routes/comments.route");
 const replie = require("./routes/Replies.route");
+const attachment = require("./routes/ChooseFile.routes");
+const forgotPassword = require("./routes/nodemailer.routes")
 // const authentication = require("./middlewares/auth.mw");
 const discussion = require("./routes/Discussion");
 const assignedUsers = require("./routes/AssignedUsers");
@@ -43,13 +45,12 @@ app.use(
   })
 );
 
-
-
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());
 
 app.use("/projects", projects);
+app.use("/files", attachment);
 app.use("/users", users);
 app.use("/feedback", feedback);
 app.use("/signin", signIn);
@@ -57,6 +58,7 @@ app.use("/comment", comment);
 app.use("/replie", replie);
 app.use("/discussion", discussion);
 app.use("/assigned", assignedUsers);
+app.use("/forgotPassword",forgotPassword)
 
 const Port = process.env.port;
 app.listen(Port, () => {

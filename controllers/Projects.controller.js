@@ -19,14 +19,8 @@ exports.getOneProject = async (req, res) => {
   }
 };
 
-
 exports.createProject = async (req, res) => {
   try {
-    const uploadResponse = await cloudinary.uploader.upload(req.body.file ,{
-      upload_preset: "attachments",
-      
-    })
-    
     const data = projectModel({
       searchObject: req.body.SearchObject,
       claims: req.body.ClaimsToBeSearched,
@@ -51,7 +45,6 @@ exports.createProject = async (req, res) => {
       usipr: req.body.USIPRSpecial,
       impClaim: req.body.ImportantClaims,
       nonImpClaim: req.body.UnimportantClaims,
-      file: uploadResponse.secure_url,
     });
     await data.save();
     res.json({ data: data, err: null, code: 200 });
@@ -63,7 +56,8 @@ exports.createProject = async (req, res) => {
 
 exports.updateProject = async (req, res) => {
   try {
-    const result = await projectModel.findOneAndUpdate({ projectId: req.params.id },
+    const result = await projectModel.findOneAndUpdate(
+      { projectId: req.params.id },
       {
         searchObject: req.body.SearchObject,
         claims: req.body.ClaimsToBeSearched,
@@ -87,12 +81,11 @@ exports.updateProject = async (req, res) => {
         sso: req.body.SSONeeded,
         usipr: req.body.USIPRSpecial,
         impClaim: req.body.ImportantClaims,
-        nonImpClaim: req.body.UnimportantClaims
+        nonImpClaim: req.body.UnimportantClaims,
       }
     );
     res.send({ Message: "Successfully updated project!", code: 200 });
-  }
-  catch (err) {
-    res.send(err)
+  } catch (err) {
+    res.send(err);
   }
 };
