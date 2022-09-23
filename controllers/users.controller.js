@@ -6,9 +6,9 @@ const UsersModel = require("../models/Users.model");
 
 exports.createUser = async (req, res) => {
   try {
-    const uploadResponse = await cloudinary.uploader.upload(req.body.picture, {
-      upload_preset: "attachments",
-    });
+    // const uploadResponse = await cloudinary.uploader.upload(req.body.picture, {
+    //   upload_preset: "attachments",
+    // });
 
     const data = usersModel({
       password: req.body.password,
@@ -16,23 +16,20 @@ exports.createUser = async (req, res) => {
       email: req.body.email,
       role: req.body.role,
       status: req.body.status,
-      picture: uploadResponse.secure_url
-    })
+      // picture: uploadResponse.secure_url,
+    });
     try {
-      await data.save()
+      await data.save();
       res.json({ data: data, err: null, code: 200 });
-    }
-
-    catch (error) {
+    } catch (error) {
       console.log("error: ", error);
       res.json({ error: error, data: null, code: 403 });
     }
-
   } catch (error) {
     console.log("error: ", error);
     res.json({ error: error, data: null, code: 500 });
   }
-}
+};
 
 exports.getUsers = async (req, res) => {
   let item = await usersModel.find();
@@ -59,7 +56,7 @@ exports.deleteUser = async (req, res) => {
     { $set: { status: false } }
   );
   res.send(result);
-}
+};
 
 exports.SearchUser = async (req, res) => {
   let result = await usersModel.find({
@@ -72,8 +69,6 @@ exports.updateUser = async (req, res) => {
   try {
     const _id = req.params.id;
     const updatedData = req.body;
-
-
     const result = await usersModel.findByIdAndUpdate(
       _id, updatedData
     )

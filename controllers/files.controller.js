@@ -1,24 +1,13 @@
 const cloudinary = require('cloudinary').v2;
+const  multer = require("multer");
  
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_API_CLOUD,
     api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    secure: true,
 })
 
-// exports.uploads = (file,folder) => {
-//     return new promise(resolve=>{
-//         cloudinary.uploader.upload(file,(result)=>{
-//             resolve({
-//                 url:result.url,
-//                 id:result.public_id
-//             })
-//         },{
-//             resource_type:"auto",
-//             folder:folder
-//         })
-//     })
-// }
 
 
 module.exports = {cloudinary}
