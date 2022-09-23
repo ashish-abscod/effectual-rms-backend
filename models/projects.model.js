@@ -80,9 +80,9 @@ const projectSchema = new mongoose.Schema({
   nonImpClaim: {
     type: String,
   },
-  attachment: {
+  file: {
     type: String,
-  },
+  }
 });
 
 //pass third argument as schema name if exactly what you want

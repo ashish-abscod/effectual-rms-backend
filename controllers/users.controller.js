@@ -6,9 +6,9 @@ const UsersModel = require("../models/Users.model");
 
 exports.createUser = async (req, res) => {
   try {
-    const uploadResponse = await cloudinary.uploader.upload(req.body.picture, {
-      upload_preset: "attachments",
-    });
+    // const uploadResponse = await cloudinary.uploader.upload(req.body.picture, {
+    //   upload_preset: "attachments",
+    // });
 
     const data = usersModel({
       password: req.body.password,
@@ -16,7 +16,7 @@ exports.createUser = async (req, res) => {
       email: req.body.email,
       role: req.body.role,
       status: req.body.status,
-      picture: uploadResponse.secure_url,
+      // picture: uploadResponse.secure_url,
     });
     try {
       await data.save();

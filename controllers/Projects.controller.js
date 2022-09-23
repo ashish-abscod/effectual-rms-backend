@@ -1,5 +1,5 @@
 const projectModel = require("../models/Projects.model");
-// const { cloudinary } = require("./Files.controller");
+const { cloudinary } = require("./Files.controller");
 
 exports.getProjects = async (req, res) => {
   try {
@@ -19,15 +19,14 @@ exports.getOneProject = async (req, res) => {
   }
 };
 
+
 exports.createProject = async (req, res) => {
   try {
-    // const uploadResponse = await cloudinary.uploader.upload(
-    //   req.body.attachment,
-    //   {
-    //     upload_preset: "attachments",
-    //   }
-    // );
-
+    const uploadResponse = await cloudinary.uploader.upload(req.body.file ,{
+      upload_preset: "attachments",
+      
+    })
+    
     const data = projectModel({
       searchObject: req.body.SearchObject,
       claims: req.body.ClaimsToBeSearched,
@@ -52,7 +51,7 @@ exports.createProject = async (req, res) => {
       usipr: req.body.USIPRSpecial,
       impClaim: req.body.ImportantClaims,
       nonImpClaim: req.body.UnimportantClaims,
-      // attachment: uploadResponse.secure_url,
+      file: uploadResponse.secure_url,
     });
     await data.save();
     res.json({ data: data, err: null, code: 200 });

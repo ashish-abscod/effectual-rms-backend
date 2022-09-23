@@ -4,8 +4,6 @@ const mongoose = require("mongoose");
 require("dotenv/config");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 const projects = require("./routes/projects.route");
 const users = require("./routes/users.route");
 const feedback = require("./routes/feedback.route");
@@ -45,22 +43,11 @@ app.use(
   })
 );
 
-app.use(
-  bodyParser.urlencoded({
-    limit: "50MB",
-    extended: true,
-    parameterLimit: 50000,
-  })
-);
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    limit: "50MB",
-    extended: true,
-    parameterLimit: 50000,
-  })
-);
+
+
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(express.json());
 
 app.use("/projects", projects);
 app.use("/users", users);
