@@ -13,6 +13,7 @@ const signIn = require("./routes/signIn.route");
 // const authentication = require("./middlewares/auth.mw");
 const discussion = require("./routes/Discussion");
 const assignedUsers = require("./routes/AssignedUsers");
+const evaluation = require("./routes/Evaluation");
 
 //---------------Mongodb Connection -----------------
 mongoose.Promise = global.Promise;
@@ -43,32 +44,6 @@ app.use(
   })
 );
 
-// node-mailer
-// let transporter = nodemailer.createTransport({
-//   host: 'smtp.gmail.com',
-//   post: 587,
-//   secure: false,
-//   requireTLS: true,
-//   auth:{
-//     user:'tamanna.bajaj@abscod.com',
-//     pass:""
-//   }
-
-// })
-// let mailOptions ={
-//   from :'tamanna.bajaj@abscod.com',
-//   to :'mayank.chaturvedi@abscod.com',
-//   subject :"mail tester",
-//   Text:"hello yooooo "
-// }
-// transporter.sendMail(mailOptions,function(err,info){
-//   if(err){
-//     console.log(err);
-//   }else{
-//     console.log("email has been sent successfully",info.response);
-//   }
-// })
-
 app.use(
   bodyParser.urlencoded({
     limit: "50mb",
@@ -78,16 +53,21 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
 
-
-app.use('/projects', projects);
-app.use('/users', users);
+app.use("/projects", projects);
+app.use("/users", users);
 app.use("/feedback", feedback);
 app.use("/signin", signIn);
 app.use("/discussion", discussion);
 app.use("/assigned", assignedUsers);
-
+app.use("/evaluation", evaluation);
 
 const Port = process.env.port;
 app.listen(Port, () => {
