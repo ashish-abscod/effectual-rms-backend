@@ -1,6 +1,5 @@
 const CommentsModel = require("../models/Comments.model");
 
-
 exports.createComment = async(req,res) => {
     try {
         const data = new CommentsModel(req.body)

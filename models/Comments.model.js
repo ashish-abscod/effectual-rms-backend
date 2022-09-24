@@ -1,31 +1,31 @@
-const mongoose = require("mongoose");   //Erase if already required
+const mongoose = require("mongoose"); //Erase if already required
 
-const commentSchema = new mongoose.Schema({
-
+const commentSchema = new mongoose.Schema(
+  {
     commentId: {
-        type: String
+      type: String,
     },
     projectId: {
-        type: String
+      type: String,
     },
     comment: {
-        type: String
+      type: String,
     },
     time: {
-        type: String
+      type: String,
     },
     userName: {
-        type: String
+      type: String,
     },
     userRole: {
-        type: String
-    }
-},
-    {
-        toJSON: { virtuals: true },
-        toObject: { virtuals: true }
-    }
-)
+      type: String,
+    },
+  },
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
 //virtual population for Replies
 

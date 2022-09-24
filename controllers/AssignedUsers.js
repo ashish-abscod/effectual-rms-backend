@@ -13,3 +13,8 @@ exports.getAssignedUser = async (req, res) => {
     res.send({ result: "data not found" });
   }
 };
+
+exports.removeAssignedUser = async (req, resp) => {
+  let result = await AssignedModel.deleteOne({ _id: req.params.id });
+  resp.send(result);
+};
