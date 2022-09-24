@@ -5,6 +5,7 @@ exports.createAssignedUser = async (req, res) => {
   let result = await add.save();
   res.send(result);
 };
+
 exports.getAssignedUser = async (req, res) => {
   let item = await AssignedModel.find();
   if (item.length > 0) {
@@ -15,6 +16,6 @@ exports.getAssignedUser = async (req, res) => {
 };
 
 exports.removeAssignedUser = async (req, resp) => {
-  let result = await AssignedModel.findByIdAndDelete({ userId: req.params._id });
+  let result = await AssignedModel.deleteOne({ _id: req.params.id });
   resp.send(result);
 };
