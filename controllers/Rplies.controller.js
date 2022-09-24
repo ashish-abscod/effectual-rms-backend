@@ -2,7 +2,7 @@ const ReplieModel = require("../models/Replies.model");
 
 exports.createReplie = async (req, res) => {
   const data = new ReplieModel({
-    replie: req.body.replie,
+    replie: req.body
   });
 
   try {

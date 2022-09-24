@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
-const usersModel = require("../models/Users.model");
+const { User } = require("../models/users.model");
 require("dotenv").config({ path: "../.env" });
 
 exports.signIn = async (req, res) => {
   try {
-    const user = await usersModel.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email });
     if (!user)
       return res.status(400).json({ Message: "Invalid User", code: 404 });
 
