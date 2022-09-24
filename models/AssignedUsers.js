@@ -4,14 +4,12 @@ const mongoose = require("mongoose"); // Erase if already required
 const assignedSchema = new mongoose.Schema({
   userId: {
     type: [],
-    required: true,
   },
   ProjectId: {
     type: String,
   },
   assignedBy: {
     type: String,
-    required: true,
   },
 });
 

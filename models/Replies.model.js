@@ -1,23 +1,25 @@
 const mongoose = require("mongoose"); //Erase if already required
 
-const replieSchema = new mongoose.Schema(
-  {
-    commentId: {
-      type: String,
-    },
-    replie: {
-      type: String,
-    },
-    time: {
-      type: String,
-    },
-    userName: {
-      type: String,
-    },
-    userRole: {
-      type: String,
-    },
+const replieSchema = new mongoose.Schema({
+  projectId: {
+    type: String
   },
+  commentId: {
+    type: String,
+  },
+  replie: {
+    type: String,
+  },
+  time: {
+    type: String,
+  },
+  userName: {
+    type: String,
+  },
+  userRole: {
+    type: String,
+  },
+},
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },

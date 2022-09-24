@@ -63,15 +63,17 @@ exports.SearchUser = async (req, res) => {
   });
   res.send(result);
 };
-
 exports.updateUser = async (req, res) => {
   try {
     const _id = req.params.id;
     const updatedData = req.body;
-    const result = await User.findByIdAndUpdate(_id, updatedData);
+    const result = await User.findByIdAndUpdate(
+      _id, updatedData
+    )
 
-    res.send(result);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.send(result)
+  }
+  catch (error) {
+    res.status(400).json({ message: error.message })
   }
 };

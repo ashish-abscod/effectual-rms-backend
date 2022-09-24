@@ -29,10 +29,10 @@ const commentSchema = new mongoose.Schema(
 
 //virtual population for Replies
 
-commentSchema.virtual("replies", {
-  ref: "Replies",
-  foreignField: "comment",
-  localField: "commentId",
+commentSchema.virtual('myReplies', {
+    ref : 'Replies',
+    foreignField : 'commentId',
+    localField : 'commentId'
 });
 
 //pass third argument as schema name if exactly what you want
