@@ -1,7 +1,6 @@
 const ReplieModel = require("../models/Replies.model")
 
 exports.createReplie = async(req,res) => {
-    console.log(req.body)
     const data = new ReplieModel({
         replie: req.body.content,
         time : req.body.time,
