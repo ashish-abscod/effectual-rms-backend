@@ -13,6 +13,7 @@ const replie = require("./routes/Replies.route");
 // const authentication = require("./middlewares/auth.mw");
 const discussion = require("./routes/Discussion");
 const assignedUsers = require("./routes/AssignedUsers");
+const evaluation = require("./routes/Evaluation");
 
 //---------------Mongodb Connection -----------------
 mongoose.Promise = global.Promise;
@@ -57,6 +58,7 @@ app.use("/comment", comment);
 app.use("/replie", replie);
 app.use("/discussion", discussion);
 app.use("/assigned", assignedUsers);
+app.use("/evaluation", evaluation);
 
 const Port = process.env.port;
 app.listen(Port, () => {

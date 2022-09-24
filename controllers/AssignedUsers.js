@@ -5,3 +5,11 @@ exports.createAssignedUser = async (req, res) => {
   let result = await add.save();
   res.send(result);
 };
+exports.getAssignedUser = async (req, res) => {
+  let item = await AssignedModel.find();
+  if (item.length > 0) {
+    res.send(item);
+  } else {
+    res.send({ result: "data not found" });
+  }
+};

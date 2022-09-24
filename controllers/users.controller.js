@@ -41,9 +41,9 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.getUsersById = async (req, res) => {
-  const result = await usersModel.findOne({ _id: req.params.id })
+  const result = await usersModel.findOne({ _id: req.params.id });
   if (result) {
-    res.send(result)
+    res.send(result);
   } else {
     res.send({ result: "data not found" });
   }
@@ -64,7 +64,6 @@ exports.SearchUser = async (req, res) => {
   });
   res.send(result);
 };
-
 exports.updateUser = async (req, res) => {
   try {
     const _id = req.params.id;
