@@ -1,13 +1,14 @@
-const CommentsModel = require("../models/Comments.model");
+const ReplieModel = require("../models/Replies.model")
 
-exports.createComment = async(req,res) => {
-    const data = new CommentsModel({
-        comment: req.body.content,
+exports.createReplie = async(req,res) => {
+    console.log(req.body)
+    const data = new ReplieModel({
+        replie: req.body.content,
         time : req.body.time,
         userName : req.body.userName,
         userRole : req.body.userRole
     })
-    
+
     try {
         const result = await data.save();
         res.status(200).json(result)
