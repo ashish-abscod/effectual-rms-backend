@@ -1,5 +1,5 @@
 const mongoose = require("mongoose"); // Erase if already required
-const Joi = require("Joi")
+const Joi = require("Joi");
 var Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 
@@ -31,12 +31,13 @@ const userSchema = new Schema({
 });
 
 //Export the model
-const User = mongoose.models['Users'] || mongoose.model("Users", userSchema, "Users");
+const User =
+  mongoose.models["Users"] || mongoose.model("Users", userSchema, "Users");
 
 const validate = (Users) => {
   const Schema = Joi.object({
-      email: Joi.string().email().required(),
-      password: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
   });
   return Schema.validate(Users);
 };

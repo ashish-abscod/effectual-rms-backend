@@ -15,6 +15,9 @@ exports.getAssignedUser = async (req, res) => {
 };
 
 exports.removeAssignedUser = async (req, resp) => {
-  let result = await AssignedModel.deleteOne({ _id: req.params.id });
+  let result = await AssignedModel.findOneAndUpdate(
+    { _id: req.params.id },
+    { $pull: { userId: { _id: req.params.userId } } }
+  );
   resp.send(result);
 };
