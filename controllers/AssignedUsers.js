@@ -22,3 +22,12 @@ exports.removeAssignedUser = async (req, resp) => {
   );
   resp.send(result);
 };
+
+exports.updateAssignedUser = async (req, res) => {
+  const result = await AssignedModel.updateOne(
+    { _id: req.params.id },
+
+    { $set: { userId: req.body } }
+  );
+  res.send(result);
+};
