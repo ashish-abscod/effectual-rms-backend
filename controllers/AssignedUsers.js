@@ -15,6 +15,15 @@ exports.getAssignedUser = async (req, res) => {
   }
 };
 
+exports.assignedUserGetById = async (req, resp) => {
+  let result = await AssignedModel.findOne({ projectId: req.params.id });
+  if (result) {
+    resp.send(result);
+  } else {
+    resp.send({ result: "no record found" });
+  }
+};
+
 exports.removeAssignedUser = async (req, resp) => {
   let result = await AssignedModel.findOneAndUpdate(
     { _id: req.params.id },
