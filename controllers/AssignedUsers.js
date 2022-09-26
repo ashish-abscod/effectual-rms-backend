@@ -5,6 +5,7 @@ exports.createAssignedUser = async (req, res) => {
   let result = await add.save();
   res.send(result);
 };
+
 exports.getAssignedUser = async (req, res) => {
   let item = await AssignedModel.find();
   if (item.length > 0) {

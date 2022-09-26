@@ -1,10 +1,9 @@
 const ReplieModel = require("../models/Replies.model")
 
-exports.createReplie = async(req,res) => {
-    const data = new ReplieModel({
-        replie: req.body.replie,
-        
-    })
+exports.createReplie = async (req, res) => {
+  const data = new ReplieModel({
+    replie: req.body
+  });
 
     try {
         const dataToSave = await data.save();
