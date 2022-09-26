@@ -1,9 +1,11 @@
+const { string } = require("joi");
 const mongoose = require("mongoose"); //Erase if already required
 
 const commentSchema = new mongoose.Schema(
   {
     commentId: {
-      type: String,
+      type:String,
+      default: mongoose.Types.ObjectId(),
     },
     projectId: {
       type: String,
