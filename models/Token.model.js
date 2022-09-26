@@ -1,9 +1,11 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose"); 
+const { Schema, model } = mongoose;
+// Erase if already required
 
+// Declare the Schema of the Mongo model
 const tokenSchema = new Schema({
     userId: {
-        type: Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         required: true,
         ref: "Users",
     },
@@ -18,4 +20,5 @@ const tokenSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model("token", tokenSchema,"token");
+const Token = mongoose.model("token", tokenSchema,"token");
+module.exports = Token

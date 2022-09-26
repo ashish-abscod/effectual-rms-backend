@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.post("/",forgotPassword)
+router.put("/create_password",forgotPassword)
 router.post("/reset_password/:userId/:token",resetPassword)
 
 

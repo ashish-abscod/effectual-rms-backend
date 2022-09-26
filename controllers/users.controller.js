@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
-const {User} = require("../models/users.model");
-const { cloudinary } = require("./Files.controller");
+const { User } = require("../models/users.model");
+// const { cloudinary } = require("./Files.controller");
 const jwt = require("jsonwebtoken");
 
 exports.createUser = async (req, res) => {
