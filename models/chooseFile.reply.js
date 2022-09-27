@@ -1,8 +1,8 @@
 const mongoose = require("mongoose"); // Erase if already required
 
 // Declare the Schema of the Mongo model
-const attachmentSchema = new mongoose.Schema({
-  projectId: {
+const replieAttachmentSchema = new mongoose.Schema({
+  replieId: {
     type: String,
   },
   file: {
@@ -15,4 +15,4 @@ const attachmentSchema = new mongoose.Schema({
 });
 
 //Export the model
-module.exports = mongoose.model("Attachments", attachmentSchema, "Attachments");
+module.exports = mongoose.model("replieAttachments", replieAttachmentSchema, "replieAttachments");

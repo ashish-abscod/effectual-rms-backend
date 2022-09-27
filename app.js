@@ -11,11 +11,14 @@ const signIn = require("./routes/signIn.route");
 const comment = require("./routes/comments.route");
 const replie = require("./routes/Replies.route");
 const attachment = require("./routes/ChooseFile.routes");
+const commentAttachment = require("./routes/chooseFileComment.route");
+const replyAttachment = require("./routes/chooseFileReply.route");;
 const forgotPassword = require("./routes/nodemailer.routes")
 // const authentication = require("./middlewares/auth.mw");
 const discussion = require("./routes/Discussion");
 const assignedUsers = require("./routes/AssignedUsers");
 const evaluation = require("./routes/Evaluation");
+
 
 //---------------Mongodb Connection -----------------
 mongoose.Promise = global.Promise;
@@ -52,6 +55,8 @@ app.use(express.json());
 
 app.use("/projects", projects);
 app.use("/files", attachment);
+app.use("/commentFiles", commentAttachment);
+app.use("/replyFiles", replyAttachment);
 app.use("/users", users);
 app.use("/feedback", feedback);
 app.use("/signin", signIn);
