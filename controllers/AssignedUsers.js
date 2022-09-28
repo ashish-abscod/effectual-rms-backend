@@ -25,7 +25,7 @@ exports.assignedUserGetById = async (req, resp) => {
 };
 
 exports.removeAssignedUser = async (req, resp) => {
-  let result = await AssignedModel.findOneAndUpdate(
+  let result = await AssignedModel.findByIdAndUpdate(
     { _id: req.params.id },
     { $pull: { userId: { _id: req.params.userId } } }
   );
@@ -34,7 +34,7 @@ exports.removeAssignedUser = async (req, resp) => {
 
 exports.updateAssignedUser = async (req, res) => {
   const result = await AssignedModel.updateOne(
-    { _id: req.params.id },
+    { projectId: req.params.id },
 
     { $set: { userId: req.body } }
   );
