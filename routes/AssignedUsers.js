@@ -2,12 +2,16 @@ const {
   createAssignedUser,
   getAssignedUser,
   removeAssignedUser,
+  updateAssignedUser,
+  assignedUserGetById,
 } = require("../controllers/AssignedUsers");
 
 const router = require("express").Router();
 
 router.post("/createUser", createAssignedUser);
 router.get("/getUser", getAssignedUser);
-router.delete("/deleteUser/:id", removeAssignedUser);
+router.get("/getUserById/:id", assignedUserGetById);
+router.put("/deleteUser/:id/:userId", removeAssignedUser);
+router.put("/updateUser/:id/", updateAssignedUser);
 
 module.exports = router;

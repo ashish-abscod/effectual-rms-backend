@@ -15,7 +15,28 @@ exports.getAssignedUser = async (req, res) => {
   }
 };
 
+exports.assignedUserGetById = async (req, resp) => {
+  let result = await AssignedModel.findOne({ projectId: req.params.id });
+  if (result) {
+    resp.send(result);
+  } else {
+    resp.send({ result: "no record found" });
+  }
+};
+
 exports.removeAssignedUser = async (req, resp) => {
-  let result = await AssignedModel.deleteOne({ _id: req.params.id });
+  let result = await AssignedModel.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $pull: { userId: { _id: req.params.userId } } }
+  );
   resp.send(result);
+};
+
+exports.updateAssignedUser = async (req, res) => {
+  const result = await AssignedModel.findOneAndUpdate(
+    { projectId: req.params.id },
+
+    { $push: { userId: {$each : req.body } }}
+  );
+  res.send(result);
 };
