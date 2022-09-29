@@ -2,7 +2,10 @@ const mongoose = require("mongoose"); // Erase if already required
 
 // Declare the Schema of the Mongo model
 const CommentAttachmentSchema = new mongoose.Schema({
-    commentId: {
+  projectId:{
+    type: String,
+  },
+  commentId: {
     type: String,
   },
   file: {

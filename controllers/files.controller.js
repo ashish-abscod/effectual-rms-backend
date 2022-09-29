@@ -8,6 +8,12 @@ cloudinary.config({
   secure: true,
 });
 
+const storage = multer.diskStorage({
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + "-" + Date.now());
+  },
+});
 
+const upload = multer({ storage });
 
-module.exports = { cloudinary };
+module.exports = { cloudinary,upload };

@@ -1,9 +1,11 @@
-const { cloudinary } = require("./Files.controller");
+const { cloudinary,upload } = require("./Files.controller");
 const AttachmentModel = require("../models/ChooseFile.projects");
 
 exports.createFile = async (req, res) => {
   try {
+    
     const uploadResponse = await cloudinary.uploader.upload(req.body.file, {
+      
       resource_type: "raw",
       upload_preset: "attachments",
     });
