@@ -33,10 +33,10 @@ exports.removeAssignedUser = async (req, resp) => {
 };
 
 exports.updateAssignedUser = async (req, res) => {
-  const result = await AssignedModel.updateOne(
+  const result = await AssignedModel.findOneAndUpdate(
     { projectId: req.params.id },
 
-    { $set: { userId: req.body } }
+    { $push: { userId: req.body } }
   );
   res.send(result);
 };

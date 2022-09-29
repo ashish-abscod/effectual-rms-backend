@@ -12,6 +12,6 @@ router.post("/createUser", createAssignedUser);
 router.get("/getUser", getAssignedUser);
 router.get("/getUserById/:id", assignedUserGetById);
 router.put("/deleteUser/:id/:userId", removeAssignedUser);
-router.put("/updateUser/:id/", updateAssignedUser);
+router.post("/updateUser/:id/", updateAssignedUser);
 
 module.exports = router;
