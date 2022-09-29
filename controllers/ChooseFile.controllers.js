@@ -21,5 +21,5 @@ exports.createFile = async (req, res) => {
   } catch (error) {
     console.log("error: ", error);
     res.json({ error: error, data: null, code: 500 });
-  }
+  };
 };
