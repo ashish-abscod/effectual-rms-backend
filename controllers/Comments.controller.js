@@ -2,6 +2,7 @@ const CommentsModel = require("../models/Comments.model");
 
 exports.createComment = async(req,res) => {
     const data = new CommentsModel({
+        projectId : req.body.projectId,
         comment: req.body.content,
         time : req.body.time,
         userName : req.body.userName,

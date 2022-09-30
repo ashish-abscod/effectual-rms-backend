@@ -4,13 +4,13 @@ const mongoose = require("mongoose"); // Erase if already required
 const projectSchema = new mongoose.Schema({
   projectId: {
     type: String,
-    // required: true,
-    // unique: true,
+    required: true,
+    unique: true,
   },
   searchObject: {
     type: String,
-    // required: true,
-    // unique: true,
+    required: true,
+    unique: true,
   },
   claims: {
     type: String,

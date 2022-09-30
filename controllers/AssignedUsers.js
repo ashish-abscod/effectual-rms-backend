@@ -36,7 +36,7 @@ exports.updateAssignedUser = async (req, res) => {
   const result = await AssignedModel.findOneAndUpdate(
     { projectId: req.params.id },
 
-    { $push: { userId: req.body } }
+    { $push: { userId: { $each: req.body } } }
   );
   res.send(result);
 };
