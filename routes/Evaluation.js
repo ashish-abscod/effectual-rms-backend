@@ -1,6 +1,11 @@
 const router = require("express").Router();
-const { createEvaluation } = require("../controllers/Evaluation");
+const {
+  createEvaluation,
+  getEvaluation,
+  evaluationUpdate,
+} = require("../controllers/Evaluation");
 
 router.post("/", createEvaluation);
-
+router.get("/getById/:id", getEvaluation);
+router.post("/:projectId", evaluationUpdate);
 module.exports = router;
