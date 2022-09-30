@@ -41,6 +41,7 @@ exports.createProject = async (req, res) => {
     const data = projectModel({
       projectId: generatedProjectId,
       searchObject: req.body.SearchObject,
+      patentNumber : req.body.KnownPriorArt,
       claims: req.body.ClaimsToBeSearched,
       reqDelivery: req.body.RequirementForDelivery,
       projectName: req.body.ProjectName,
@@ -52,7 +53,6 @@ exports.createProject = async (req, res) => {
       status: req.body.Status,
       projectManager: req.body.ProjectManager,
       requestedDate: req.body.RequestedDate,
-      patentNumber: req.body.PatentNumber,
       createdById: req.body.CreatedById,
       completedDate: req.body.CompletedDate,
       jurisdiction: req.body.Jurisdiction,
@@ -74,10 +74,12 @@ exports.createProject = async (req, res) => {
 
 exports.updateProject = async (req, res) => {
   try {
+    console.log(req.body)
     const result = await projectModel.findOneAndUpdate(
       { projectId: req.params.id },
       {
         searchObject: req.body.SearchObject,
+        patentNumber : req.body.KnownPriorArt,
         claims: req.body.ClaimsToBeSearched,
         reqDelivery: req.body.RequirementForDelivery,
         projectName: req.body.ProjectName,
@@ -89,7 +91,6 @@ exports.updateProject = async (req, res) => {
         status: req.body.Status,
         projectManager: req.body.ProjectManager,
         requestedDate: req.body.RequestedDate,
-        patentNumber: req.body.PatentNumber,
         createdById: req.body.CreatedById,
         completedDate: req.body.CompletedDate,
         jurisdiction: req.body.Jurisdiction,
