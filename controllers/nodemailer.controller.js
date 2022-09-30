@@ -15,6 +15,7 @@ const sendEmail = async (email, subject, text) => {
             port: 465,
             maxConnections: 1000,
             secure:true,
+            service : "Gmail",
             auth: {
                 user: process.env.USER,
                 pass: process.env.PASS,
