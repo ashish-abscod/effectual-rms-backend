@@ -8,8 +8,11 @@ const CommentAttachmentSchema = new mongoose.Schema({
   commentId: {
     type: String,
   },
-  file: {
-    type: String,
+  files: {
+    type: Array,
+  },
+  uploadedBy:{
+    type:String
   },
   createdAt: {
     type: Date,
