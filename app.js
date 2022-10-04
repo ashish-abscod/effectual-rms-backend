@@ -11,12 +11,11 @@ const signIn = require("./routes/signIn.route");
 const comment = require("./routes/comments.route");
 const replie = require("./routes/Replies.route");
 const attachment = require("./routes/ChooseFile.routes");
-const forgotPassword = require("./routes/nodemailer.routes")
+const forgotPassword = require("./routes/ForgotPassword.routes");
 // const authentication = require("./middlewares/auth.mw");
 const discussion = require("./routes/Discussion");
 const assignedUsers = require("./routes/AssignedUsers");
 const evaluation = require("./routes/Evaluation");
-
 //---------------Mongodb Connection -----------------
 mongoose.Promise = global.Promise;
 mongoose.connect(
@@ -59,8 +58,8 @@ app.use("/comment", comment);
 app.use("/replie", replie);
 app.use("/discussion", discussion);
 app.use("/assigned", assignedUsers);
-app.use("/forgotPassword",forgotPassword);
 app.use("/evaluation",evaluation);
+app.use("/password",forgotPassword);
 
 const Port = process.env.port;
 app.listen(Port, () => {
