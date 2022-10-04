@@ -1,10 +1,7 @@
-const mongoose = require("mongoose"); // Erase if already required
-const Joi = require("Joi")
-var Schema = mongoose.Schema;
-mongoose.Promise = global.Promise;
+const mongoose = require("mongoose");
 
 // Declare the Schema of the Mongo model
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
@@ -31,14 +28,4 @@ const userSchema = new Schema({
 });
 
 //Export the model
-const User = mongoose.models['Users'] || mongoose.model("Users", userSchema, "Users");
-
-const validate = (Users) => {
-  const Schema = Joi.object({
-      email: Joi.string().email().required(),
-      password: Joi.string().required(),
-  });
-  return Schema.validate(Users);
-};
-
-module.exports = { User, validate };
+module.exports = mongoose.model("Users", userSchema, "Users");
