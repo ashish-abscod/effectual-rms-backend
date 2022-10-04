@@ -74,7 +74,6 @@ exports.createProject = async (req, res) => {
 
 exports.updateProject = async (req, res) => {
   try {
-    console.log(req.body)
     const result = await projectModel.findOneAndUpdate(
       { projectId: req.params.id },
       {

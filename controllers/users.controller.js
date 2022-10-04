@@ -55,6 +55,8 @@ exports.SearchUser = async (req, res) => {
   },{password:0,status:0});
   res.send(result);
 };
+
+
 exports.updateUser = async (req, res) => {
   try {
     const _id = req.params.id;
@@ -62,10 +64,8 @@ exports.updateUser = async (req, res) => {
     const result = await usersModel.findByIdAndUpdate(
       _id, updatedData
     )
-
-    res.send(result)
-  }
-  catch (error) {
-    res.status(400).json({ message: error.message })
+    res.send(result);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 };
