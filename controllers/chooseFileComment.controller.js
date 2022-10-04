@@ -15,25 +15,23 @@ exports.createFile = async (req, res) => {
   }
 };
 
-
-
-exports.saveFile = async (req,res) => {
+exports.saveFile = async (req, res) => {
   try {
     let add = new commentAttachmentModel(req.body);
-  let result = await add.save();
-  res.send(result);
+    let result = await add.save();
+    res.send(result);
+  } catch (error) {
+    console.log(error);
   }
-  catch(error){
-   console.log(error)
-  }
-}
+};
 
-
-exports.getFiles = async(req,res) => {
+exports.getFiles = async (req, res) => {
   try {
-    const data = await commentAttachmentModel.findOne({ commentId: req.params.id});
+    const data = await commentAttachmentModel.find({
+      projectId: req.params.id,
+    });
     res.json(data);
   } catch (error) {
     res.send(error);
   }
-}
+};

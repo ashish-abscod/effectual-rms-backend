@@ -26,5 +26,7 @@ const replieSchema = new mongoose.Schema({
   }
 );
 
+
+
 //pass third argument as schema name if exactly what you want
 module.exports = mongoose.model("Replies", replieSchema, "Replies");

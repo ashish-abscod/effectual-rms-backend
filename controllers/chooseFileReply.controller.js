@@ -16,10 +16,9 @@ exports.createFile = async (req, res) => {
 };
 
 
-
 exports.saveFile = async (req,res) => {
   try {
-    let add = new replyAttachmentModel(req.body);
+  let add = new replyAttachmentModel(req.body);
   let result = await add.save();
   res.send(result);
   }
@@ -31,7 +30,6 @@ exports.saveFile = async (req,res) => {
 
 exports.getFiles = async(req,res) => {
   try {
-    console.log(req.params)
     const data = await replyAttachmentModel.find({ commentId: req.params.id});
     res.json(data);
   } catch (error) {
