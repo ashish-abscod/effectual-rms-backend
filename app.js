@@ -12,6 +12,8 @@ const comment = require("./routes/comments.route");
 const replie = require("./routes/Replies.route");
 const attachment = require("./routes/ChooseFile.routes");
 const forgotPassword = require("./routes/ForgotPassword.routes");
+const commentAttachment = require("./routes/chooseFileComment.route");
+const replyAttachment = require("./routes/chooseFileReply.route");;
 // const authentication = require("./middlewares/auth.mw");
 const discussion = require("./routes/Discussion");
 const assignedUsers = require("./routes/AssignedUsers");
@@ -51,6 +53,8 @@ app.use(express.json());
 
 app.use("/projects", projects);
 app.use("/files", attachment);
+app.use("/commentFiles", commentAttachment);
+app.use("/replyFiles", replyAttachment);
 app.use("/users", users);
 app.use("/feedback", feedback);
 app.use("/signin", signIn);

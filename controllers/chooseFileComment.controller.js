@@ -1,5 +1,5 @@
-const { cloudinary, upload } = require("./Files.controller");
-const AttachmentModel = require("../models/ChooseFile.projects");
+const { cloudinary } = require("./Files.controller");
+const commentAttachmentModel = require("../models/chooseFile.comment");
 
 exports.createFile = async (req, res) => {
   try {
@@ -15,22 +15,23 @@ exports.createFile = async (req, res) => {
   }
 };
 
-exports.saveFile = async (req,res) => {
+exports.saveFile = async (req, res) => {
   try {
-    let add = new AttachmentModel(req.body);
-  let result = await add.save();
-  res.send(result);
+    let add = new commentAttachmentModel(req.body);
+    let result = await add.save();
+    res.send(result);
+  } catch (error) {
+    console.log(error);
   }
-  catch(error){
-   console.log(error)
-  }
-}
+};
 
-exports.getFiles = async(req,res) => {
+exports.getFiles = async (req, res) => {
   try {
-    const data = await AttachmentModel.findOne({ projectId: req.params.id});
+    const data = await commentAttachmentModel.find({
+      projectId: req.params.id,
+    });
     res.json(data);
   } catch (error) {
     res.send(error);
   }
-}
+};
