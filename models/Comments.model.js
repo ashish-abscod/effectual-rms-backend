@@ -36,6 +36,11 @@ commentSchema.virtual('myReplies', {
     foreignField : 'commentId',
     localField : 'commentId'
 });
+commentSchema.virtual('commentAttachments', {
+    ref : 'Replies',
+    foreignField : 'commentId',
+    localField : 'commentId'
+});
 
 //pass third argument as schema name if exactly what you want
 module.exports = mongoose.model("Comments", commentSchema, "Comments");
