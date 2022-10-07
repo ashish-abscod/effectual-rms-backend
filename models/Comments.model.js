@@ -5,7 +5,7 @@ const commentSchema = new mongoose.Schema(
   {
     commentId: {
       type:String,
-      default: mongoose.Types.ObjectId(),
+      unique : true
     },
     projectId: {
       type: String,
@@ -30,10 +30,16 @@ const commentSchema = new mongoose.Schema(
   }
 );
 
-//virtual population for Replies
-
-commentSchema.virtual('myReplies', {
+//virtual population for replie
+commentSchema.virtual('replies', {
     ref : 'Replies',
+    foreignField : 'commentId',
+    localField : 'commentId'
+});
+
+//virtual population for comment attachments
+commentSchema.virtual('attachments', {
+    ref : 'CommentAttachments',
     foreignField : 'commentId',
     localField : 'commentId'
 });

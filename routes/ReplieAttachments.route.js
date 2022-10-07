@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const { createFile,saveFile,getFiles } = require("../controllers/chooseFileComment.controller");
+const { createFile,saveFile,getFiles } = require("../controllers/ReplieAttachments.controller");
 
 router.post("/", createFile);
 router.post("/saveToDb",saveFile);

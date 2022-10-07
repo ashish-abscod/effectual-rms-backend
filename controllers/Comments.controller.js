@@ -1,7 +1,9 @@
 const CommentsModel = require("../models/Comments.model");
+const ObjectID = require("bson-objectid");
 
 exports.createComment = async(req,res) => {
     const data = new CommentsModel({
+        commentId : ObjectID(),
         projectId : req.body.projectId,
         comment: req.body.content,
         time : req.body.time,

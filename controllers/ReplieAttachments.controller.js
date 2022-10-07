@@ -1,5 +1,5 @@
 const { cloudinary } = require("./Files.controller");
-const replyAttachmentModel = require("../models/chooseFile.reply");
+const replyAttachmentModel = require("../models/ReplieAttachments.model");
 
 exports.createFile = async (req, res) => {
   try {

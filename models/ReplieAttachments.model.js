@@ -5,7 +5,7 @@ const replieAttachmentSchema = new mongoose.Schema({
   projectId:{
     type: String,
   },
-  commentId: {
+  replieId: {
     type: String,
   },
   files: {
@@ -25,4 +25,4 @@ const replieAttachmentSchema = new mongoose.Schema({
 
 
 //Export the model
-module.exports = mongoose.model("replieAttachments", replieAttachmentSchema, "replieAttachments");
+module.exports = mongoose.model("ReplieAttachments", replieAttachmentSchema, "ReplieAttachments");

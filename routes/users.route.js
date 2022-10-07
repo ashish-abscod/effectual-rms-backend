@@ -5,7 +5,7 @@ const {
   updateUser,
   getUsersById,
   SearchUser,
-} = require("../controllers/users.controller");
+} = require("../controllers/Users.controller");
 const router = require("express").Router();
 
 router.post("/", createUser);

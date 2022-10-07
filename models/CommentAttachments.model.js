@@ -24,4 +24,4 @@ const CommentAttachmentSchema = new mongoose.Schema({
 });
 
 //Export the model
-module.exports = mongoose.model("commentAttachments", CommentAttachmentSchema, "commentAttachments");
+module.exports = mongoose.model("CommentAttachments", CommentAttachmentSchema, "CommentAttachments");

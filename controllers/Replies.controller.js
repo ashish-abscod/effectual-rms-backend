@@ -1,7 +1,9 @@
 const ReplieModel = require("../models/Replies.model")
+const ObjectID = require("bson-objectid");
 
 exports.createReplie = async(req,res) => {
     const data = new ReplieModel({
+        replieId : ObjectID(),
         commentId : req.body.commentId,
         projectId : req.body.projectId,
         replie: req.body.content,
