@@ -9,6 +9,7 @@ const commentSchema = new mongoose.Schema(
     },
     projectId: {
       type: String,
+      required:true
     },
     comment: {
       type: String,
