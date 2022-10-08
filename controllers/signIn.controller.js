@@ -6,10 +6,10 @@ exports.signIn = async (req, res) => {
   try {
     const user = await usersModel.findOne({ email: req.body.email });
     if (!user)
-      return res.status(400).json({ Message: "Invalid User", code: 404 });
+      return res.status(400).json({ message: "Invalid User", code: 404 });
 
     if (user.password !== req.body.password)
-      return res.status(400).json({ Message: "Invalid Password", code: 404 });
+      return res.status(400).json({ message: "Invalid Password", code: 404 });
 
     const token = await jwt.sign(
       { _id: user._id.toString() }, //payload
@@ -17,7 +17,7 @@ exports.signIn = async (req, res) => {
     );
 
     user.password = undefined;
-    res.json({ Message: "Login Successfully!", user, token, code: 200 });
+    res.json({ message: "Successfully loggedin user!", user, token, code: 200 });
   } catch (error) {
     console.log("Error:", error);
     res.json({ Message: "Something went wrong", code: 500 });

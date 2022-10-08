@@ -14,11 +14,11 @@ exports.createUser = async (req, res) => {
       res.json({ data: data, err: null, code: 200 });
     } catch (error) {
       console.log("error: ", error);
-      res.json({ error: error, data: null, code: 403 });
+      res.json({ error: error, data: null, code: 403 ,message:"Successfully registered user",status:"success"});
     }
   } catch (error) {
     console.log("error: ", error);
-    res.json({ error: error, data: null, code: 500 });
+    res.json({ error: error, data: null, code: 500,message:"Something went wrong",status:"unsuccessfull" });
   }
 };
 
@@ -61,11 +61,12 @@ exports.updateUser = async (req, res) => {
   try {
     const _id = req.params.id;
     const updatedData = req.body;
+    const option = {newt:rue}
     const result = await usersModel.findByIdAndUpdate(
-      _id, updatedData
+      _id, updatedData,option
     )
-    res.send(result);
+    res.json({result,message:"Successfully updated profile",status:"success"});
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: error.message,status:"unsuccessfull" });
   }
 };

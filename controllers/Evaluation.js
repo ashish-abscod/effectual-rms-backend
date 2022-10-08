@@ -10,9 +10,9 @@ exports.getEvaluation = async (req, resp) => {
     projectId: req.params.id,
   });
   if (result) {
-    resp.send(result);
+    resp.json({result,message:"Successfully evaluated!"});
   } else {
-    resp.send({ result: "no record found" });
+    resp.send({ message: "no record found" });
   }
 };
 exports.evaluationUpdate = async (req, resp) => {
@@ -27,5 +27,5 @@ exports.evaluationUpdate = async (req, resp) => {
       setDefaultsOnInsert: true,
     }
   );
-  resp.send(result);
+  resp.json({result,message:"successfully updated"});
 };
