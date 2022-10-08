@@ -16,7 +16,7 @@
 //     cb(nulll,true)
 //    }else {
 //     //prevent the upload
-//     cb({message:'unsupported file format'},false)
+//     cb({msg:'unsupported file format'},false)
 //    }
 
 // }

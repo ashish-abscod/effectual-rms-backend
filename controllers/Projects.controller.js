@@ -1,6 +1,5 @@
 const projectModel = require("../models/Projects.model");
-const projectSeriesModel = require("../models/ProjectSeries.model")
-const { cloudinary } = require("./Files.controller");
+const projectSeriesModel = require("../models/ProjectSeries.model");
 
 exports.getProjects = async (req, res) => {
   try {
@@ -20,28 +19,50 @@ exports.getOneProject = async (req, res) => {
   }
 };
 
+exports.findSearchObject = async (req, res) => {
+  try {
+    const data = await projectModel.findOne({
+      searchObject: req.body.searchObject,
+    });
+
+    if (data?.searchObject) {
+      return res.json({
+        msg: "Search object already existed!",
+        status: "failed",
+      });
+    }
+    return res.json({
+      msg: "This is a unique project Id",
+      status: "success",
+    });
+  } catch (error) {
+    return res.json({ msg: "Something went wrong!", status: "failed" });
+  }
+};
 
 exports.createProject = async (req, res) => {
-
   try {
     //getting incremented series of projectId
-    const result = await projectSeriesModel.findOneAndUpdate({}, { $inc: { 'series': 1 } }, { new: true });
+    const result = await projectSeriesModel.findOneAndUpdate(
+      {},
+      { $inc: { series: 1 } },
+      { new: true }
+    );
 
     //logic to create a custom projectId
     const today = new Date();
     const yy = String(today.getFullYear()).slice(-2);
     let mm = today.getMonth() + 1; // Months start at 0!
     let dd = today.getDate();
-    if (dd < 10) dd = '0' + dd;
-    if (mm < 10) mm = '0' + mm;
+    if (dd < 10) dd = "0" + dd;
+    if (mm < 10) mm = "0" + mm;
     const formattedToday = dd + mm + yy;
     const generatedProjectId = `EKS-${formattedToday}-${result?.series}`;
-
 
     const data = projectModel({
       projectId: generatedProjectId,
       searchObject: req.body.SearchObject,
-      patentNumber : req.body.KnownPriorArt,
+      patentNumber: req.body.KnownPriorArt,
       claims: req.body.ClaimsToBeSearched,
       reqDelivery: req.body.RequirementForDelivery,
       projectName: req.body.ProjectName,
@@ -65,12 +86,11 @@ exports.createProject = async (req, res) => {
       nonImpClaim: req.body.UnimportantClaims,
     });
     await data.save();
-    res.json({ data: data, err: null, code: 200 });
+    res.json({ data, msg : "Successfully created project!", status : "success" });
   } catch (error) {
-    res.json({ error: "Error in project creation.", data: null, code: 500 });
+    res.json({ msg: "Error in project creation.", success: "success" });
   }
-}
-
+};
 
 exports.updateProject = async (req, res) => {
   try {
@@ -78,7 +98,7 @@ exports.updateProject = async (req, res) => {
       { projectId: req.params.id },
       {
         searchObject: req.body.SearchObject,
-        patentNumber : req.body.KnownPriorArt,
+        patentNumber: req.body.KnownPriorArt,
         claims: req.body.ClaimsToBeSearched,
         reqDelivery: req.body.RequirementForDelivery,
         projectName: req.body.ProjectName,
@@ -102,7 +122,7 @@ exports.updateProject = async (req, res) => {
         nonImpClaim: req.body.UnimportantClaims,
       }
     );
-    res.send({ Message: "Successfully updated project!", code: 200 });
+    res.send({ msg: "Successfully updated project!", status : "success" });
   } catch (err) {
     res.send(err);
   }

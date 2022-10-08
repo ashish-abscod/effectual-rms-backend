@@ -25,7 +25,7 @@
 //     }
 
 //     } catch (error) {
-//         console.log({message : error})
+//         console.log({msg : error})
 //     }
 // })
 

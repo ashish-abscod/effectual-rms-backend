@@ -10,7 +10,7 @@ const mongoose = require("mongoose");
 exports.forgotPassword = async (req, res) => {
     try {
         const { error } = validateEmail(req.body);
-        if (error) return res.json({ mssg: error.details[0].message, status: "failed" });
+        if (error) return res.json({ mssg: error.details[0].msg, status: "failed" });
 
         const user = await usersModel.findOne({ email: req.body.email }, { password: 0 });
         if (!user)
@@ -54,7 +54,7 @@ exports.forgotPassword = async (req, res) => {
 exports.resetPassword = async (req, res) => {
     try {
         const { error } = validatePassword(req.body);
-        if (error) return res.json(error.details[0].message);
+        if (error) return res.json(error.details[0].msg);
 
         // return true if userId is valid mongoose objectId else false
         if (mongoose.isValidObjectId(req.params.userId)) {

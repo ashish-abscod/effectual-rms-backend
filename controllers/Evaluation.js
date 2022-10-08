@@ -3,16 +3,17 @@ const EvaluationModel = require("../models/Evaluation.model");
 exports.createEvaluation = async (req, res) => {
   let add = new EvaluationModel(req.body);
   let result = await add.save();
-  res.send(result);
+  res.json({result, msg:"Successfully evaluated!"})
 };
+
 exports.getEvaluation = async (req, resp) => {
   let result = await EvaluationModel.findOne({
     projectId: req.params.id,
   });
   if (result) {
-    resp.send(result);
+    resp.json({result, msg:"Successfully evaluated!"});
   } else {
-    resp.send({ result: "no record found" });
+    resp.send({ msg: "no record found" });
   }
 };
 exports.evaluationUpdate = async (req, resp) => {
@@ -27,5 +28,5 @@ exports.evaluationUpdate = async (req, resp) => {
       setDefaultsOnInsert: true,
     }
   );
-  resp.send(result);
+  resp.json({result,msg:"Successfully updated evaluation!"});
 };

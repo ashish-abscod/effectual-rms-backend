@@ -10,19 +10,19 @@ const authentication = async (req, res, next) => {
     const token = Token?.slice(7);
 
     if (!token) {
-      res.json({ Message : "No Token Provided" , code: 403 });
+      res.json({ msg : "No Token Provided" , code: 403 });
     }
 
     try {
       await jwt.verify(token, process.env.SUPER_SECRET_KEY);
       next();
     } catch (e) {
-      res.json({ Message: "Unauthorized Token Provided", code : 401 })
+      res.json({ msg: "Unauthorized Token Provided", code : 401 })
     }
   }
   catch (error) {
     console.log("error: ", error);
-    res.json({ Message: "Something went wrong", code: 404 });
+    res.json({ msg: "Something went wrong", code: 404 });
   }
 };
 

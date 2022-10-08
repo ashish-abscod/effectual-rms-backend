@@ -9,16 +9,12 @@ exports.createUser = async (req, res) => {
       role: req.body.role,
       status: req.body.status,
     });
-    try {
-      await data.save();
-      res.json({ data: data, err: null, code: 200 });
-    } catch (error) {
-      console.log("error: ", error);
-      res.json({ error: error, data: null, code: 403 });
-    }
-  } catch (error) {
+    await data.save();
+    res.json({ error, msg: "Successfully registered user", status: "success" });
+  }
+  catch (error) {
     console.log("error: ", error);
-    res.json({ error: error, data: null, code: 500 });
+    res.json({ error, msg: "Sorry, User was not regiestered. Something went wrong. ", status: "failed" });
   }
 };
 
@@ -27,7 +23,7 @@ exports.getUsers = async (req, res) => {
   if (item.length > 0) {
     res.send(item);
   } else {
-    res.send({ result: "data not found" });
+    res.send({ result: "Data not found!" });
   }
 };
 
@@ -36,23 +32,27 @@ exports.getUsersById = async (req, res) => {
   if (result) {
     res.send(result);
   } else {
-    res.send({ result: "data not found" });
+    res.send({ result: "Data not found!" });
   }
 };
 
 exports.deleteUser = async (req, res) => {
-  const result = await usersModel.updateOne(
-    { _id: req.params.id },
+  try {
+    await usersModel.updateOne(
+      { _id: req.params.id },
 
-    { $set: { status: false } }
-  );
-  res.send(result);
+      { $set: { status: false } }
+    );
+    res.json({ msg: "Successfully deleted user!", status: "success" });
+  } catch {
+    res.json({ msg: "Sorry, User was not deleted!", status: "failed" });
+  }
 };
 
 exports.SearchUser = async (req, res) => {
   let result = await usersModel.find({
-    $or: [{ name: { $regex: req.params.key }}],
-  },{password:0,status:0});
+    $or: [{ name: { $regex: req.params.key } }],
+  }, { password: 0, status: 0 });
   res.send(result);
 };
 
@@ -61,11 +61,12 @@ exports.updateUser = async (req, res) => {
   try {
     const _id = req.params.id;
     const updatedData = req.body;
+    const option = { newt: rue }
     const result = await usersModel.findByIdAndUpdate(
-      _id, updatedData
+      _id, updatedData, option
     )
-    res.send(result);
+    res.json({ result, msg: "Successfully updated profile!", status: "success" });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ msg : "Sorry, profile was not updated.", status: "failed" });
   }
 };
