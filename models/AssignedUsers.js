@@ -3,7 +3,7 @@ const mongoose = require("mongoose"); // Erase if already required
 // Declare the Schema of the Mongo model
 const assignedSchema = new mongoose.Schema({
   userId: {
-    type: [{}],
+    type: [],
     required: true,
   },
   projectId: {
