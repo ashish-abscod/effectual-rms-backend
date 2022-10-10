@@ -1,17 +1,17 @@
-const { cloudinary, upload } = require("./Files.controller");
+const { cloudinary} = require("./Files.controller");
 const AttachmentModel = require("../models/Attachments.model");
 
 exports.createFile = async (req, res) => {
   try {
     const uploadResponse = await cloudinary.uploader.upload(req.body.file, {
-      resource_type: "raw",
-      upload_preset: "attachments",
+      resource_type: "auto",
+      upload_preset: "attachments"
     });
     const url = uploadResponse.secure_url;
     res.json({ url, msg:"Successfully uploaded file!",status:"success" });
   } catch (error) {
-    console.log("error: ", error);
     res.json({ error, msg:"Sorry, File uploadation failed!",status:"failed"  });
+    console.log(error)
   }
 };
 
