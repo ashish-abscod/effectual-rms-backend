@@ -10,7 +10,7 @@ exports.createUser = async (req, res) => {
       status: req.body.status,
     });
     await data.save();
-    res.json({ error, msg: "Successfully registered user", status: "success" });
+    res.json({msg: "Successfully registered user", status: "success" });
   }
   catch (error) {
     console.log("error: ", error);
@@ -59,12 +59,19 @@ exports.SearchUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
+    console.log(req.body);
+    console.log(req.params.id)
+
     const _id = req.params.id;
-    const updatedData = req.body;
-    const option = { newt: rue }
-    const result = await usersModel.findByIdAndUpdate(
-      _id, updatedData, option
-    )
+
+    const userData = {
+      name : req.body.name,
+      email : req.body.email,
+      password : req.body.password
+    };
+    const option = { new: true }
+    // const result = await usersModel.findByIdAndUpdate(_id, userData, option);
+    // console.log(result);
     res.json({ result, msg: "Successfully updated profile!", status: "success" });
   } catch (error) {
     res.status(400).json({ msg : "Sorry, profile was not updated.", status: "failed" });
