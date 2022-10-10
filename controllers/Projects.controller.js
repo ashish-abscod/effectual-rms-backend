@@ -27,12 +27,12 @@ exports.findSearchObject = async (req, res) => {
 
     if (data?.searchObject) {
       return res.json({
-        msg: "Search object already existed!",
+        msg: "Search Object already existed!",
         status: "failed",
       });
     }
     return res.json({
-      msg: "This is a unique project Id",
+      msg: "This is an unique Search Object.",
       status: "success",
     });
   } catch (error) {
@@ -88,7 +88,7 @@ exports.createProject = async (req, res) => {
     await data.save();
     res.json({ data, msg : "Successfully created project!", status : "success" });
   } catch (error) {
-    res.json({ msg: "Error in project creation.", success: "success" });
+    res.json({ msg: "Sorry, project not created, something went wrong.", success: "failed" });
   }
 };
 
@@ -122,8 +122,8 @@ exports.updateProject = async (req, res) => {
         nonImpClaim: req.body.UnimportantClaims,
       }
     );
-    res.send({ msg: "Successfully updated project!", status : "success" });
+    res.json({ msg: "Successfully updated project!", status : "success" });
   } catch (err) {
-    res.send(err);
+    res.json({ err, msg: "Sorry, project not updated! Something went wrong.", status : "failed" });
   }
 };
