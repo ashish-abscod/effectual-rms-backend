@@ -51,7 +51,7 @@ exports.deleteUser = async (req, res) => {
 
 exports.SearchUser = async (req, res) => {
   let result = await usersModel.find({
-    $or: [{ name: { $regex: req.params.key }}],
+    $or: [{ name: { $regex: req.params.key ,$options: "i"}}],
   },{password:0,status:0});
   res.send(result);
 };
