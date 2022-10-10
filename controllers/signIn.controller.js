@@ -6,7 +6,7 @@ exports.signIn = async (req, res) => {
   try {
     const user = await usersModel.findOne({ email: req.body.email });
     if (!user)
-      return res.status(400).json({ msg: "Invalid User", status : "failed"});
+      return res.status(400).json({ msg: "Invalid user email", status : "failed"});
 
     if (user.password !== req.body.password)
       return res.status(400).json({ msg: "Invalid Password", status :"failed" });
