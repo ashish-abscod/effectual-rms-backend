@@ -60,16 +60,13 @@ exports.SearchUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    console.log(req.body)
     const { error } = validateUser(req.body);
     if (error) return res.json({msg:error.details[0].message, status:"failed"});
 
     const _id = req.params.id;
-    console.log(_id);
     const option = { new: true}
     let result = await usersModel.findByIdAndUpdate(_id, req.body, option);
     result.password = null;
-    console.log(result)
     res.json({ result, msg: "Successfully updated profile!", status: "success" });
   } catch (error) {
     res.json({ msg : "Sorry, profile was not updated.", status: "failed" });
