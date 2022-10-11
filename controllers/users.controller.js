@@ -1,4 +1,5 @@
 const usersModel = require("../models/users.model");
+const {validateUser } = require("../utils/ValidateUser.utils");
 
 exports.createUser = async (req, res) => {
   try {
@@ -59,21 +60,18 @@ exports.SearchUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    console.log(req.body);
-    console.log(req.params.id)
+    console.log(req.body)
+    const { error } = validateUser(req.body);
+    if (error) return res.json({msg:error.details[0].message, status:"failed"});
 
     const _id = req.params.id;
-
-    const userData = {
-      name : req.body.name,
-      email : req.body.email,
-      password : req.body.password
-    };
-    const option = { new: true }
-    // const result = await usersModel.findByIdAndUpdate(_id, userData, option);
-    // console.log(result);
+    console.log(_id);
+    const option = { new: true}
+    let result = await usersModel.findByIdAndUpdate(_id, req.body, option);
+    result.password = null;
+    console.log(result)
     res.json({ result, msg: "Successfully updated profile!", status: "success" });
   } catch (error) {
-    res.status(400).json({ msg : "Sorry, profile was not updated.", status: "failed" });
+    res.json({ msg : "Sorry, profile was not updated.", status: "failed" });
   }
 };
