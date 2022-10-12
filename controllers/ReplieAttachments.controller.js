@@ -14,7 +14,6 @@ exports.createFile = async (req, res) => {
   }
 };
 
-
 exports.saveFile = async (req,res) => {
   try {
   let add = new replyAttachmentModel(req.body);
@@ -35,3 +34,4 @@ exports.getFiles = async(req,res) => {
     res.send(error);
   }
 }
+

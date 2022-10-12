@@ -27,7 +27,7 @@ exports.findSearchObject = async (req, res) => {
 
     if (data?.searchObject) {
       return res.json({
-        msg: "Search Object already existed!",
+        msg: "Search Object already exist!",
         status: "failed",
       });
     }
@@ -122,7 +122,7 @@ exports.updateProject = async (req, res) => {
         nonImpClaim: req.body.UnimportantClaims,
       }
     );
-    res.json({ msg: "Successfully updated project!", status : "success" });
+    res.json({result, msg: "Successfully updated project!", status : "success" });
   } catch (err) {
     res.json({ err, msg: "Sorry, project not updated! Something went wrong.", status : "failed" });
   }

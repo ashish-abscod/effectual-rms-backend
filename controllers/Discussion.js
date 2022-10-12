@@ -22,16 +22,15 @@ exports.getDiscussion = async (req, res) => {
   }
 };
 
-exports.getFilesByRole = async (req, res) => {
+// exports.getFilesByRole = async (req, res) => {
  
-  try {
-      const effectualAdmin = await commentAttachmentModel.find({projectId: req.params.id})
-      res.json(effectualAdmin);
-      res.json({error})
-    } catch (error) {
-    res.send(error);
-  }
-};
+//   try {
+//       const effectualAdmin = await commentAttachmentModel.find({projectId: req.params.projectId,role:req.params.role})
+//       res.json(effectualAdmin);
+//     } catch (error) {
+//     res.send(error);
+//   }
+// };
 
 // exports.getDiscussion = async (req, res) => {
 //     try {
