@@ -11,7 +11,7 @@ exports.getDiscussion = async (req, res) => {
         //deep population for replie attachments
         populate: {
           path: "attachments",
-        },
+        }
       })
       .populate({
         //populating comment attachments
@@ -22,6 +22,17 @@ exports.getDiscussion = async (req, res) => {
     res.send("Error - " + e);
   }
 };
+
+// exports.getFilesByRole = async (req, res) => {
+ 
+//   try {
+//       const effectualAdmin = await commentAttachmentModel.find({projectId: req.params.projectId,role:req.params.role})
+//       res.json(effectualAdmin);
+//     } catch (error) {
+//     res.send(error);
+//   }
+// };
+
 // exports.getDiscussion = async (req, res) => {
 //     try {
 //         const data = await RepliesModel.find({projectId : req.params.projectId})

@@ -3,15 +3,29 @@ const {validateUser } = require("../utils/ValidateUser.utils");
 
 exports.createUser = async (req, res) => {
   try {
-    const data = usersModel({
+
+    const isExist = await usersModel.findOne({ email: req.body.email });
+    if (isExist) {
+      return res.status(400).json({
+        error: "user already exist",
+        data: null,
+        code: 400,
+      });
+    }
+
+    const newUser = usersModel({
       password: req.body.password,
       name: req.body.name,
       email: req.body.email,
       role: req.body.role,
       status: req.body.status,
     });
-    await data.save();
-    res.json({msg: "Successfully registered user", status: "success" });
+    // const salt = await bcrypt.genSalt();
+    // const hashedPssword = await bcrypt.hash(newUser.password, salt);
+    // newUser.password = hashedPssword;
+    // await newUser.save();
+    // newUser.password = undefined;
+    res.json({ newUser, msg: "Successfully created user", err: null, code: 200, status: "success" });
   }
   catch (error) {
     console.log("error: ", error);
@@ -52,8 +66,8 @@ exports.deleteUser = async (req, res) => {
 
 exports.SearchUser = async (req, res) => {
   let result = await usersModel.find({
-    $or: [{ name: { $regex: req.params.key ,$options: "i"}}],
-  },{password:0,status:0});
+    $or: [{ name: { $regex: req.params.key, $options: "i" } }],
+  }, { password: 0, status: 0 });
   res.send(result);
 };
 
