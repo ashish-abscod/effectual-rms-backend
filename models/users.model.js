@@ -17,7 +17,8 @@ const userSchema = new mongoose.Schema({
 
   role: {
     type: String,
-    // required: true,
+    role:"Manager"||"Patent Expert" || "Searcher" || "Client Admin" || "Effectual Admin" || "Technical Expert"
+    
   },
   status: {
     type: Boolean,

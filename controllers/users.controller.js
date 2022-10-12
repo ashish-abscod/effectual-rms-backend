@@ -23,7 +23,7 @@ exports.createUser = async (req, res) => {
     // const salt = await bcrypt.genSalt();
     // const hashedPssword = await bcrypt.hash(newUser.password, salt);
     // newUser.password = hashedPssword;
-    // await newUser.save();
+    await newUser.save();
     // newUser.password = undefined;
     res.json({ newUser, msg: "Successfully created user", err: null, code: 200, status: "success" });
   }
@@ -85,3 +85,18 @@ exports.updateUser = async (req, res) => {
     res.status(400).json({ msg: "Sorry, profile did not updated.", status: "failed" });
   }
 };
+
+
+// exports.updatePassword = async(req,res)  => {
+//   try{
+//     const _id = req.params.id;
+//     const userData = req.body
+//     const option = { new: true }
+//     const result = await usersModel.findByIdAndUpdate(_id, userData, option);
+//     console.log(result);
+//     res.json({ result, msg: "Successfully updated profile!", status: "success" });
+//   }catch(error){
+//     res.status(400).json({ msg: "Sorry, profile did not updated.", status: "failed" });
+//   }
+ 
+// }

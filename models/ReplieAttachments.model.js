@@ -8,6 +8,11 @@ const replieAttachmentSchema = new mongoose.Schema({
   replieId: {
     type: String,
   },
+  role: {
+    type: String,
+    role:"Manager"||"Patent Expert" || "Searcher" || "Client Admin" || "Effectual Admin" || "Technical Expert"
+    
+  },
   files: {
     type: Array,
   },

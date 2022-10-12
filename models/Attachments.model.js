@@ -8,6 +8,11 @@ const attachmentSchema = new mongoose.Schema({
   projectId:{
     type:String
   },
+  role: {
+    type: String,
+    role:"Manager"||"Patent Expert" || "Searcher" || "Client Admin" || "Effectual Admin" || "Technical Expert"
+    
+  },
   uploadedBy:{
     type:String
   },
