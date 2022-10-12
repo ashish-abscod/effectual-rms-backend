@@ -4,9 +4,8 @@ require("../models/Replies.model");
 exports.getDiscussion = async (req, res) => {
   try {
     const data = await commentModel
-      .find()
-      .sort("time")
       .find({ projectId: req.params.projectId })
+      .sort({ "time": "desc"})
       .populate({
         path: "replies",
         //deep population for replie attachments
