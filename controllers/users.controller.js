@@ -23,12 +23,11 @@ exports.createUser = async (req, res) => {
     // const salt = await bcrypt.genSalt();
     // const hashedPssword = await bcrypt.hash(newUser.password, salt);
     // newUser.password = hashedPssword;
-    // await newUser.save();
-    // newUser.password = undefined;
-    res.json({ newUser, msg: "Successfully created user", err: null, code: 200, status: "success" });
+    await newUser.save();
+    newUser.password = undefined;
+    res.json({ newUser, msg: "Successfully created user", status: "success" });
   }
   catch (error) {
-    console.log("error: ", error);
     res.json({ error, msg: "Sorry, User was not regiestered. Something went wrong. ", status: "failed" });
   }
 };
