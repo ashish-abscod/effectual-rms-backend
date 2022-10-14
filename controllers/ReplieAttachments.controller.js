@@ -35,12 +35,3 @@ exports.getFiles = async(req,res) => {
   }
 }
 
-exports.getFilesByRole = async (req, res) => {
-  try {
-      const effectualAdmin = await replyAttachmentModel.find({projectId: req.params.projectId,role:req.params.role})
-      res.json(effectualAdmin);
-    } catch (error) {
-    res.send(error);
-  }
-};
-

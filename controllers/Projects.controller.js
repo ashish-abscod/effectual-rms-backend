@@ -122,6 +122,7 @@ exports.updateProject = async (req, res) => {
         nonImpClaim: req.body.UnimportantClaims,
       }
     );
+    console.log(result);
     res.json({result, msg: "Successfully updated project!", status : "success" });
   } catch (err) {
     res.json({ err, msg: "Sorry, project not updated! Something went wrong.", status : "failed" });
