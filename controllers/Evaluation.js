@@ -1,4 +1,5 @@
 const EvaluationModel = require("../models/Evaluation.model");
+const date = require('date-and-time');
 
 exports.getEvaluation = async (req, resp) => {
   let result = await EvaluationModel.findOne({
@@ -13,11 +14,12 @@ exports.getEvaluation = async (req, resp) => {
 
 
 exports.evaluationUpdate = async (req, res) => {
+  const now = new Date();
   try {
     let result = await EvaluationModel.findOneAndUpdate(
       { projectId: req.params.projectId },
       {
-        $set: req.body,
+        $set: { ...req?.body, modification: date.format(now, "YYYY-MM-DD") },
       },
       {
         upsert: true,
