@@ -5,7 +5,7 @@ const {
   updateProject,
   getOneProject,
   findSearchObject
-} = require("../controllers/projects.controller.js");
+} = require("../controllers/Projects.controller.js");
 
 router.get("/", getProjects);
 router.post('/findSearchObject',findSearchObject)
