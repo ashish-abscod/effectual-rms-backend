@@ -65,9 +65,8 @@ app.use("/assigned", assignedUsers);
 app.use("/evaluation",evaluation);
 app.use("/password",forgotPassword);
 
-const Port = process.env.port;
-app.listen(Port, () => {
+const Port = process.env.port || 8080;
+app.listen(Port, (err) => {
+  if(err) throw err;
   console.log(`Server is listening on port ${Port}`);
 })
-
-
