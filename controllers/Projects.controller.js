@@ -85,8 +85,8 @@ exports.createProject = async (req, res) => {
       impClaim: req.body.ImportantClaims,
       nonImpClaim: req.body.UnimportantClaims,
     });
-    await data.save();
-    res.json({ data, msg : "Successfully created project!", status : "success" });
+    const info =await data.save();
+    res.json({ ...info._doc, msg : "Successfully created project!", status : "success" });
   } catch (error) {
     res.json({ msg: "Sorry, project not created, something went wrong.", success: "failed" });
   }
@@ -122,8 +122,7 @@ exports.updateProject = async (req, res) => {
         nonImpClaim: req.body.UnimportantClaims,
       }
     );
-    console.log(result);
-    res.json({result, msg: "Successfully updated project!", status : "success" });
+    res.json({...result._doc, msg: "Successfully updated project!", status : "success" });
   } catch (err) {
     res.json({ err, msg: "Sorry, project not updated! Something went wrong.", status : "failed" });
   }

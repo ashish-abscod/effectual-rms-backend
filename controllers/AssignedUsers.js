@@ -33,10 +33,13 @@ exports.removeAssignedUser = async (req, resp) => {
 };
 
 exports.updateAssignedUser = async (req, res) => {
+  console.log(req.body)
+console.log(req.params.id)
   const result = await AssignedModel.findOneAndUpdate(
     { projectId: req.params.id },
 
     { $push: { userId: {$each : req.body } }}
   );
+  console.log(result)
   res.send(result);
 };
