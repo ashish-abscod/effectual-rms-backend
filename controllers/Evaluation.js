@@ -1,19 +1,7 @@
 const EvaluationModel = require("../models/Evaluation.model");
-
-exports.createEvaluation = async (req, res) => {
-  try {
-    // console.log(req.body)
-    let add = new EvaluationModel(req.body);
-    let result = await add.save();
-    // console.log(result);
-    res.json({ result, msg: "Successfully evaluated!", status: "success" })
-  } catch (error) {
-    res.json({ error, msg: "Something went wrong.", status: "failed" });
-  }
-};
+const date = require('date-and-time');
 
 exports.getEvaluation = async (req, resp) => {
-  console.log(req.body)
   let result = await EvaluationModel.findOne({
     projectId: req.params.id,
   });
@@ -26,13 +14,12 @@ exports.getEvaluation = async (req, resp) => {
 
 
 exports.evaluationUpdate = async (req, res) => {
+  const now = new Date();
   try {
-    console.log(req.body)
-
     let result = await EvaluationModel.findOneAndUpdate(
       { projectId: req.params.projectId },
       {
-        $set: req.body,
+        $set: { ...req?.body, modification: date.format(now, "YYYY-MM-DD") },
       },
       {
         upsert: true,
@@ -40,7 +27,6 @@ exports.evaluationUpdate = async (req, res) => {
         setDefaultsOnInsert: true,
       }
     );
-    console.log(result);
     res.json({ result, msg: "Successfully updated evaluation!", status: "success" });
   } catch (error) {
     res.json({ error, msg: "Something went wrong.", status: "failed" });

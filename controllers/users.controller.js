@@ -1,5 +1,5 @@
 const usersModel = require("../models/users.model");
-const bcrypt = require("bcrypt")
+const {validateUser } = require("../utils/ValidateUser.utils");
 
 exports.createUser = async (req, res) => {
   try {
@@ -24,11 +24,10 @@ exports.createUser = async (req, res) => {
     // const hashedPssword = await bcrypt.hash(newUser.password, salt);
     // newUser.password = hashedPssword;
     await newUser.save();
-    // newUser.password = undefined;
-    res.json({ newUser, msg: "Successfully created user", err: null, code: 200, status: "success" });
+    newUser.password = undefined;
+    res.json({ newUser, msg: "Successfully created user", status: "success" });
   }
   catch (error) {
-    console.log("error: ", error);
     res.json({ error, msg: "Sorry, User was not regiestered. Something went wrong. ", status: "failed" });
   }
 };
@@ -74,13 +73,16 @@ exports.SearchUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
+    const { error } = validateUser(req.body);
+    if (error) return res.json({msg:error.details[0].message, status:"failed"});
+
     const _id = req.params.id;
-    const userData = req.body
-    const option = { new: true }
-    const result = await usersModel.findByIdAndUpdate(_id, userData, option);
+    const option = { new: true}
+    let result = await usersModel.findByIdAndUpdate(_id, req.body, option);
+    result.password = null;
     res.json({ result, msg: "Successfully updated profile!", status: "success" });
   } catch (error) {
-    res.status(400).json({ msg: "Sorry, profile did not updated.", status: "failed" });
+    res.json({ msg : "Sorry, profile was not updated.", status: "failed" });
   }
 };
 

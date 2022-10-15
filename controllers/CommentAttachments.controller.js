@@ -6,6 +6,7 @@ const replyAttachmentModel = require("../models/ReplieAttachments.model")
 exports.createFile = async (req, res) => {
   try {
     const uploadResponse = await cloudinary.uploader.upload(req.body.file, {
+      use_filename :true,
       resource_type: "raw",
       upload_preset: "attachments",
     });
