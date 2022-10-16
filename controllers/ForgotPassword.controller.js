@@ -1,7 +1,7 @@
 require("dotenv").config({ path: "../.env" });
 const bcrypt = require('bcrypt');
 const randomString = require("randomstring");
-const usersModel = require("../models/Users.model");
+const usersModel = require("../models/User.model");
 const tokenModel = require("../models/Token.model");
 const { validateEmail, validatePassword } = require('../utils/ValidateUser.utils');
 const { sendEmail } = require('../utils/SendEmail');
