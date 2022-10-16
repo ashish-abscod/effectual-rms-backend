@@ -5,7 +5,7 @@ require("dotenv/config");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const projects = require("./routes/Projects.route.js");
-const users = require("./routes/Users.route.js");
+const users = require("./routes/User.route.js");
 const feedback = require("./routes/Feedback.route");
 const signIn = require("./routes/SignIn.route");
 const comment = require("./routes/Comments.route");
