@@ -41,7 +41,7 @@ app.get("/", (req, res) => {
 // ----------------------middleware cors---------------
 app.use(
   cors({
-    origin: "*",
+    origin: "https://effectual-rms-backend.herokuapp.com",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     optionsSuccessStatus: 204,
   })
