@@ -4,10 +4,11 @@ const replyAttachmentModel = require("../models/ReplieAttachments.model");
 exports.createFile = async (req, res) => {
   try {
     const uploadResponse = await cloudinary.uploader.upload(req.body.file, {
-      resource_type: "raw",
+      resource_type: "auto",
       upload_preset: "attachments",
     });
     const url = uploadResponse.secure_url;
+    console.log(uploadResponse);
     res.json({ url, msg:"Successfully uploaded file!", status:"success"});
   } catch (error) {
     res.json({ error, msg:"Sorry, File uploadation failed!", status:"failed" });
