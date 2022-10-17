@@ -7,7 +7,7 @@ exports.createFile = async (req, res) => {
   try {
     const uploadResponse = await cloudinary.uploader.upload(req.body.file, {
       use_filename :true,
-      resource_type: "raw",
+      resource_type: "auto",
       upload_preset: "attachments",
     });
     const url = uploadResponse.secure_url;
