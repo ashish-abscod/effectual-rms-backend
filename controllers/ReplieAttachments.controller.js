@@ -8,7 +8,6 @@ exports.createFile = async (req, res) => {
       upload_preset: "attachments",
     });
     const url = uploadResponse.secure_url;
-    console.log(uploadResponse);
     res.json({ url, msg:"Successfully uploaded file!", status:"success"});
   } catch (error) {
     res.json({ error, msg:"Sorry, File uploadation failed!", status:"failed" });
