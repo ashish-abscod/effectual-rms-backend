@@ -1,4 +1,4 @@
-const usersModel = require("../models/users.model");
+const usersModel = require("../models/User.model");
 const {validateUser } = require("../utils/ValidateUser.utils");
 
 exports.createUser = async (req, res) => {
@@ -85,18 +85,3 @@ exports.updateUser = async (req, res) => {
     res.json({ msg : "Sorry, profile was not updated.", status: "failed" });
   }
 };
-
-
-// exports.updatePassword = async(req,res)  => {
-//   try{
-//     const _id = req.params.id;
-//     const userData = req.body
-//     const option = { new: true }
-//     const result = await usersModel.findByIdAndUpdate(_id, userData, option);
-//     console.log(result);
-//     res.json({ result, msg: "Successfully updated profile!", status: "success" });
-//   }catch(error){
-//     res.status(400).json({ msg: "Sorry, profile did not updated.", status: "failed" });
-//   }
- 
-// }
