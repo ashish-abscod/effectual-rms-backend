@@ -4,7 +4,7 @@ const {
   removeAssignedUser,
   updateAssignedUser,
   assignedUserGetById,
-} = require("../controllers/AssignedUsers");
+} = require("../controllers/AssignedUsers.controller");
 
 const router = require("express").Router();
 

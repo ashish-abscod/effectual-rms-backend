@@ -1,4 +1,4 @@
-const { getDiscussion,getFilesByRole } = require("../controllers/Discussion");
+const { getDiscussion,getFilesByRole } = require("../controllers/Discussion.controller");
 
 const router = require("express").Router();
 

@@ -4,20 +4,20 @@ const mongoose = require("mongoose");
 require("dotenv/config");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const projects = require("./routes/Projects.route");
-const users = require("./routes/Users.route");
+const projects = require("./routes/Projects.route.js");
+const users = require("./routes/User.route.js");
 const feedback = require("./routes/Feedback.route");
 const signIn = require("./routes/SignIn.route");
 const comment = require("./routes/Comments.route");
 const replie = require("./routes/Replies.route");
-const attachment = require("./routes/Attachments.routes");
-const forgotPassword = require("./routes/ForgotPassword.routes");
+const attachment = require("./routes/Attachments.route");
+const forgotPassword = require("./routes/ForgotPassword.route");
 const commentAttachment = require("./routes/CommentAttachments.route");
 const replyAttachment = require("./routes/ReplieAttachments.route");;
 // const authentication = require("./middlewares/auth.mw");
-const discussion = require("./routes/Discussion");
-const assignedUsers = require("./routes/AssignedUsers");
-const evaluation = require("./routes/Evaluation");
+const discussion = require("./routes/Discussion.route");
+const assignedUsers = require("./routes/AssignedUsers.route");
+const evaluation = require("./routes/Evaluation.route");
 //---------------Mongodb Connection -----------------
 mongoose.Promise = global.Promise;
 mongoose.connect(
@@ -65,9 +65,8 @@ app.use("/assigned", assignedUsers);
 app.use("/evaluation",evaluation);
 app.use("/password",forgotPassword);
 
-const Port = process.env.port;
-app.listen(Port, () => {
+const Port = process.env.PORT || 8080;
+app.listen(Port, (err) => {
+  if(err) throw err;
   console.log(`Server is listening on port ${Port}`);
 })
-
-

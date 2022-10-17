@@ -8,6 +8,9 @@
     "start": "node ./app.js",
     "dev": "nodemon ./app.js"
   },
+  "engines": {
+    "node": "16.17.0"
+  },
   "author": "Ashish Sharma",
   "license": "ISC",
   "dependencies": {
