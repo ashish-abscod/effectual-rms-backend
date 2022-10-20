@@ -3,7 +3,13 @@ const replyAttachmentModel = require("../models/ReplieAttachments.model");
 
 exports.createFile = async (req, res) => {
   try {
+    const uniqueNumber = Math.floor(Date.now() * Math.random());
+    const uniqueFileName = `${uniqueNumber}_${req.body.filename}`;
     const uploadResponse = await cloudinary.uploader.upload(req.body.file, {
+      public_id: uniqueFileName,
+      use_filename: true,
+      unique_filename: true,
+      overwrite: false,
       resource_type: "auto",
       upload_preset: "attachments",
     });

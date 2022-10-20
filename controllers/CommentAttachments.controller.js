@@ -5,8 +5,13 @@ const replyAttachmentModel = require("../models/ReplieAttachments.model")
 
 exports.createFile = async (req, res) => {
   try {
+    const uniqueNumber = Math.floor(Date.now() * Math.random());
+    const uniqueFileName = `${uniqueNumber}_${req.body.filename}`;
     const uploadResponse = await cloudinary.uploader.upload(req.body.file, {
-      use_filename :true,
+      public_id: uniqueFileName,
+      use_filename: true,
+      unique_filename: true,
+      overwrite: false,
       resource_type: "auto",
       upload_preset: "attachments",
     });
@@ -62,7 +67,7 @@ exports.getFilesOfClient = async (req, res) => {
       find({ projectId: req.params.projectId, role: { $in: ["Patent Expert", "Searcher", "Client Admin", "Technical Expert"] } })
     const replyEffectualClient = await replyAttachmentModel.
       find({ projectId: req.params.projectId, role: { $in: ["Patent Expert", "Searcher", "Client Admin", "Technical Expert"] } })
-    const result = [].concat(commentEffectualClient,effectualClient,replyEffectualClient)
+    const result = [].concat(commentEffectualClient, effectualClient, replyEffectualClient)
     res.json({ result })
   } catch (error) {
     res.send(error);
