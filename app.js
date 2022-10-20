@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 require("dotenv/config");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+
+// =====================Routes==========================
 const projects = require("./routes/Projects.route.js");
 const users = require("./routes/User.route.js");
 const feedback = require("./routes/Feedback.route");
@@ -14,10 +16,10 @@ const attachment = require("./routes/Attachments.route");
 const forgotPassword = require("./routes/ForgotPassword.route");
 const commentAttachment = require("./routes/CommentAttachments.route");
 const replyAttachment = require("./routes/ReplieAttachments.route");;
-// const authentication = require("./middlewares/auth.mw");
 const discussion = require("./routes/Discussion.route");
 const assignedUsers = require("./routes/AssignedUsers.route");
 const evaluation = require("./routes/Evaluation.route");
+
 //---------------Mongodb Connection -----------------
 mongoose.Promise = global.Promise;
 mongoose.connect(
@@ -38,7 +40,7 @@ app.get("/", (req, res) => {
   res.send("Hello Express.js");
 });
 
-// ----------------------middleware cors---------------
+// ===================Middlewares================
 app.use(
   cors({
     origin: "*",
@@ -46,11 +48,8 @@ app.use(
     optionsSuccessStatus: 204,
   })
 );
-
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-app.use(express.json());
-
 app.use("/projects", projects);
 app.use("/files", attachment);
 app.use("/commentFiles", commentAttachment);
