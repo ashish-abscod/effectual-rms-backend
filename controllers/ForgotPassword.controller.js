@@ -14,7 +14,7 @@ exports.forgotPassword = async (req, res) => {
 
         const user = await usersModel.findOne({ email: req.body.email }, { password: 0 });
         if (!user)
-            return res.json({ mssg: "User with given email doesn't exist", status: "failed" });
+            return res.json({ mssg: "User with given email doesn't exist!", status: "failed" });
 
         //delete tokens if already existed for the requested user.
         let token = await tokenModel.findOne({ userId: user._id });
@@ -25,7 +25,7 @@ exports.forgotPassword = async (req, res) => {
         const tokenHash = await bcrypt.hash(resetToken, 10);
         await tokenModel({ userId: user?._id, token: tokenHash }).save(function (err) {
             if (err) {
-                return res.json({ mssg: "Token not saved error.", status: "failed" });
+                return res.json({ mssg: "Token not saved error!", status: "failed" });
             }
         });
 
@@ -41,9 +41,9 @@ exports.forgotPassword = async (req, res) => {
 
         const mssg = await sendEmail(user?.email, subject, text);
         if (mssg)
-            return res.json({ mssg: "Successfully Sent Email. Kindly check your email inbox or spam folder to reset your password.", status: "success" });
+            return res.json({ mssg: "Email Successfully Sent . Kindly check your email inbox or spam folder to reset your password!", status: "success" });
         else
-            return res.json({ mssg: "Sorry, Email not sent due to server error.", status: "failed" });
+            return res.json({ mssg: "Sorry, Email could not sent due to server error!", status: "failed" });
     }
     catch (error) {
         res.json({ mssg: "Something went wrong.", status: "failed" });

@@ -1,9 +1,10 @@
 const projectModel = require("../models/Projects.model.js");
 const projectSeriesModel = require("../models/ProjectSeries.model.js");
+const date = require('date-and-time');
 
 exports.getProjects = async (req, res) => {
   try {
-    const data = await projectModel.find();
+    const data = await projectModel.find().sort({"requestedDate":"desc"});
     res.json(data);
   } catch (e) {
     res.send("Error - " + e);
@@ -50,13 +51,8 @@ exports.createProject = async (req, res) => {
     );
 
     //logic to create a custom projectId
-    const today = new Date();
-    const yy = String(today.getFullYear()).slice(-2);
-    let mm = today.getMonth() + 1; // Months start at 0!
-    let dd = today.getDate();
-    if (dd < 10) dd = "0" + dd;
-    if (mm < 10) mm = "0" + mm;
-    const formattedToday = dd + mm + yy;
+    const now = new Date();
+    const formattedToday = date.format(now, "DDMMYY");
     const generatedProjectId = `EKS-${formattedToday}-${result?.series}`;
 
     const data = projectModel({
@@ -86,9 +82,9 @@ exports.createProject = async (req, res) => {
       nonImpClaim: req.body.UnimportantClaims,
     });
     const info =await data.save();
-    res.json({ ...info._doc, msg : "Successfully created project!", status : "success" });
+    res.json({ ...info._doc, msg : "Project has been created Successfully!", status : "success" });
   } catch (error) {
-    res.json({ msg: "Sorry, project not created, something went wrong.", success: "failed" });
+    res.json({ msg: "Sorry, project could not be created due to server issue", success: "failed" });
   }
 };
 
@@ -122,8 +118,8 @@ exports.updateProject = async (req, res) => {
         nonImpClaim: req.body.UnimportantClaims,
       }
     );
-    res.json({...result._doc, msg: "Successfully updated project!", status : "success" });
+    res.json({...result._doc, msg: "Project Successfully updated!", status : "success" });
   } catch (err) {
-    res.json({ err, msg: "Sorry, project not updated! Something went wrong.", status : "failed" });
+    res.json({ err, msg: "Sorry, could not update the project due to server issue!", status : "failed" });
   }
 };

@@ -17,9 +17,9 @@ exports.signIn = async (req, res) => {
     );
 
     user.password = undefined;
-    res.json({ msg: "Successfully login!", user, token, status : "success"});
+    res.json({ msg: "You have logged in successfully!", user, token, status : "success"});
   } catch (error) {
     console.log("Error:", error);
-    res.json({ msg: "Something went wrong", status :"failed" });
+    res.json({ msg: "Sorry, You can not logged in to this account,please check your credentials", status :"failed" });
   }
 };
