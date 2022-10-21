@@ -25,10 +25,10 @@ exports.createUser = async (req, res) => {
     // newUser.password = hashedPssword;
     await newUser.save();
     newUser.password = undefined;
-    res.json({ newUser, msg: "Successfully created user", status: "success" });
+    res.json({ newUser, msg: "User created succesfully", status: "success" });
   }
   catch (error) {
-    res.json({ error, msg: "Sorry, User was not regiestered. Something went wrong. ", status: "failed" });
+    res.json({ error, msg: "Sorry,User Creation is failed ", status: "failed" });
   }
 };
 
@@ -57,9 +57,9 @@ exports.deleteUser = async (req, res) => {
 
       { $set: { status: false } }
     );
-    res.json({ msg: "Successfully deleted user!", status: "success" });
+    res.json({ msg: "User has been removed successfully!", status: "success" });
   } catch {
-    res.json({ msg: "Sorry, User was not deleted!", status: "failed" });
+    res.json({ msg: "Sorry, We could not removed the user.Try Again!", status: "failed" });
   }
 };
 
@@ -80,8 +80,8 @@ exports.updateUser = async (req, res) => {
     const option = { new: true}
     let result = await usersModel.findByIdAndUpdate(_id, req.body, option);
     result.password = null;
-    res.json({ result, msg: "Successfully updated profile!", status: "success" });
+    res.json({ result, msg: "Profile updated successfully!", status: "success" });
   } catch (error) {
-    res.json({ msg : "Sorry, profile was not updated.", status: "failed" });
+    res.json({ msg : "Sorry,We could not update your profile!", status: "failed" });
   }
 };

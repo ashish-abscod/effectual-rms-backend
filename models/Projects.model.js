@@ -10,7 +10,6 @@ const projectSchema = new mongoose.Schema({
   searchObject: {
     type: String,
     required: true,
-    unique: true,
   },
   claims: {
     type: String,

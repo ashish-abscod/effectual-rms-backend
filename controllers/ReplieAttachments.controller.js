@@ -14,9 +14,9 @@ exports.createFile = async (req, res) => {
       upload_preset: "attachments",
     });
     const url = uploadResponse.secure_url;
-    res.json({ url, msg:"Successfully uploaded file!", status:"success"});
+    res.json({ url, msg:"File uploaded successfully!", status:"success"});
   } catch (error) {
-    res.json({ error, msg:"Sorry, File uploadation failed!", status:"failed" });
+    res.json({ error, msg:"Sorry, File uploadation is failed!", status:"failed" });
   }
 };
 
@@ -24,10 +24,10 @@ exports.saveFile = async (req,res) => {
   try {
   let add = new replyAttachmentModel(req.body);
   let result = await add.save();
-  res.json({result, mssg : "Successfully saved attachement.", status: "success"});
+  res.json({result, status: "success"});
   }
   catch(error){
-    res.json({error, mssg : "Something went wrong in saving attachement.", status: "failed"});
+    res.json({error, status: "failed"});
   }
 }
 

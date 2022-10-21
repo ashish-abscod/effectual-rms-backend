@@ -18,9 +18,9 @@ exports.createAssignedUser = async (req, res) => {
       assignedBy: req.body.assignedBy
     });
     let result = await newUser.save();
-    res.json({result,msg: "Successfully Assigned user", status: "success"});
+    res.json({result,msg: "user is assigned to the project", status: "success"});
   }catch(error){
-    res.json({ error, msg: "Sorry, user was not added to the project,Something went wrong", status: "failed" });
+    res.json({ error, msg: "Sorry,user is not assigned to the project", status: "failed" });
   }
 
 };

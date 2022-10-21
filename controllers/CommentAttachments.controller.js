@@ -16,9 +16,9 @@ exports.createFile = async (req, res) => {
       upload_preset: "attachments",
     });
     const url = uploadResponse.secure_url;
-    res.json({ url, msg: "Successfully uploaded file!", status: "success" });
+    res.json({ url, msg: "File uploaded successfully!", status: "success" });
   } catch (error) {
-    res.json({ error, code: 500, msg: "Sorry, File uploadation failed!", status: "failed" });
+    res.json({ error, code: 500, msg: "Sorry, File uploadation is failed!", status: "failed" });
   }
 };
 

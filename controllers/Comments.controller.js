@@ -8,17 +8,17 @@ exports.createComment = async(req,res) => {
         commentId : ObjectID(),
         projectId : req.body.projectId,
         comment: req.body.content,
-        time : date.format(now, "YYYY-MM-DD HH:mm:ss"),
+        time : date.format(now, "DD-MM-YYYY HH:mm:ss"),
         userName : req.body.userName,
         userRole : req.body.userRole
     })
     
     try {
         const result = await data.save();
-        res.json({...result._doc, msg: "Successfully posted comment.", status: "success"})
+        res.json({...result._doc, msg: "Comment Posted Successfully!", status: "success"})
     }
     catch (error) {
-        res.status(400).json({msg : "Sorry, something went wrong. Comment posting failed!" , status: "failed" })
+        res.status(400).json({msg : "Sorry, Comment Failed to Post!" , status: "failed" })
     }
 
 }

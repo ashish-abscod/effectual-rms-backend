@@ -27,8 +27,8 @@ exports.evaluationUpdate = async (req, res) => {
         setDefaultsOnInsert: true,
       }
     );
-    res.json({ result, msg: "Successfully updated evaluation!", status: "success" });
+    res.json({ result, msg: "Evaluation updated successfully!", status: "success" });
   } catch (error) {
-    res.json({ error, msg: "Something went wrong.", status: "failed" });
+    res.json({ error, msg: "Evaluation updation is failed!", status: "failed" });
   }
 };

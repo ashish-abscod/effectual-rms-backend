@@ -3,7 +3,7 @@ const projectSeriesModel = require("../models/ProjectSeries.model.js");
 
 exports.getProjects = async (req, res) => {
   try {
-    const data = await projectModel.find();
+    const data = await projectModel.find().sort({"requestedDate":"desc"});
     res.json(data);
   } catch (e) {
     res.send("Error - " + e);
@@ -86,9 +86,9 @@ exports.createProject = async (req, res) => {
       nonImpClaim: req.body.UnimportantClaims,
     });
     const info =await data.save();
-    res.json({ ...info._doc, msg : "Successfully created project!", status : "success" });
+    res.json({ ...info._doc, msg : "Project Created Successfully!", status : "success" });
   } catch (error) {
-    res.json({ msg: "Sorry, project not created, something went wrong.", success: "failed" });
+    res.json({ msg: "Sorry, Could not create the project due to server issue", success: "failed" });
   }
 };
 
@@ -122,8 +122,8 @@ exports.updateProject = async (req, res) => {
         nonImpClaim: req.body.UnimportantClaims,
       }
     );
-    res.json({...result._doc, msg: "Successfully updated project!", status : "success" });
+    res.json({...result._doc, msg: "project Successfully updated!", status : "success" });
   } catch (err) {
-    res.json({ err, msg: "Sorry, project not updated! Something went wrong.", status : "failed" });
+    res.json({ err, msg: "Sorry, Could not update the project due to server issue!", status : "failed" });
   }
 };
