@@ -25,10 +25,10 @@ exports.createUser = async (req, res) => {
     // newUser.password = hashedPssword;
     await newUser.save();
     newUser.password = undefined;
-    res.json({ newUser, msg: "User created succesfully", status: "success" });
+    res.json({ newUser, msg: "User has been created successfully", status: "success" });
   }
   catch (error) {
-    res.json({ error, msg: "Sorry,User Creation is failed ", status: "failed" });
+    res.json({ error, msg: "Sorry, user creation is failed ", status: "failed" });
   }
 };
 
@@ -59,7 +59,7 @@ exports.deleteUser = async (req, res) => {
     );
     res.json({ msg: "User has been removed successfully!", status: "success" });
   } catch {
-    res.json({ msg: "Sorry, We could not removed the user.Try Again!", status: "failed" });
+    res.json({ msg: "Sorry, We could not removed the user. Try Again!", status: "failed" });
   }
 };
 
@@ -82,6 +82,6 @@ exports.updateUser = async (req, res) => {
     result.password = null;
     res.json({ result, msg: "Profile updated successfully!", status: "success" });
   } catch (error) {
-    res.json({ msg : "Sorry,We could not update your profile!", status: "failed" });
+    res.json({ msg : "Sorry, we could not update your profile!", status: "failed" });
   }
 };

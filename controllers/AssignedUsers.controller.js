@@ -7,7 +7,7 @@ exports.createAssignedUser = async (req, res) => {
     const isExist = await AssignedModel.findOne({ userId: req.body.userId });
     if (isExist) {
       return res.json({
-        error: "user already assigned to the project",
+        error: "User already assigned to the project",
         data: null,
         code: 400,
       });
@@ -52,13 +52,10 @@ exports.removeAssignedUser = async (req, resp) => {
 };
 
 exports.updateAssignedUser = async (req, res) => {
-  console.log(req.body)
-console.log(req.params.id)
   const result = await AssignedModel.findOneAndUpdate(
     { projectId: req.params.id },
 
     { $push: { userId: {$each : req.body } }}
   );
-  console.log(result)
   res.send(result);
 };

@@ -16,10 +16,10 @@ exports.createReplie = async(req,res) => {
 
     try {
         const result = await data.save();
-        res.status(200).json({...result._doc, msg:"Reply Posted Successfully!", status:"success"})
+        res.status(200).json({...result._doc, msg:"Reply has been posted successfully!", status:"success"})
     }
     catch (error) {
-        res.status(400).json({error, msg:"Sorry, Reply Failed to Post!", status:"failed"})
+        res.status(400).json({error, msg:"Sorry, reply posting failed!", status:"failed"})
     }
 
 }

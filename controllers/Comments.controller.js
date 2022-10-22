@@ -15,10 +15,10 @@ exports.createComment = async(req,res) => {
     
     try {
         const result = await data.save();
-        res.json({...result._doc, msg: "Comment Posted Successfully!", status: "success"})
+        res.json({...result._doc, msg: "Comment has been posted successfully.", status: "success"})
     }
     catch (error) {
-        res.status(400).json({msg : "Sorry, Comment Failed to Post!" , status: "failed" })
+        res.status(400).json({msg : "Sorry, Comment creation was failed!" , status: "failed" })
     }
 
 }
