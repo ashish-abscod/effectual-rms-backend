@@ -1,4 +1,4 @@
-const { cloudinary} = require("./Files.controller");
+const { cloudinary } = require("./Files.controller");
 const AttachmentModel = require("../models/Attachments.model");
 
 exports.createFile = async (req, res) => {
@@ -14,27 +14,27 @@ exports.createFile = async (req, res) => {
       upload_preset: "attachments",
     });
     const url = uploadResponse.secure_url;
-    res.json({ url, msg:"File has been uploaded successfully!",status:"success" });
+    res.json({ url, msg: "File has been uploaded successfully!", status: "success" });
   } catch (error) {
-    res.json({ error, msg:"Sorry, File uploadation is failed!",status:"failed"  });
+    res.json({ error, msg: "Sorry, File uploadation is failed!", status: "failed" });
     console.log(error)
   }
 };
 
-exports.saveFile = async (req,res) => {
+exports.saveFile = async (req, res) => {
   try {
     let add = new AttachmentModel(req.body);
-  let result = await add.save();
-  res.send(result);
+    let result = await add.save();
+    res.send(result);
   }
-  catch(error){
-   console.log(error)
+  catch (error) {
+    console.log(error)
   }
 }
 
-exports.getFiles = async(req,res) => {
+exports.getFiles = async (req, res) => {
   try {
-    const data = await AttachmentModel.findOne({ projectId: req.params.id});
+    const data = await AttachmentModel.findOne({ projectId: req.params.id });
     res.json(data);
   } catch (error) {
     res.send(error);
