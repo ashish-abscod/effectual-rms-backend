@@ -19,7 +19,7 @@ exports.evaluationUpdate = async (req, res) => {
     let result = await EvaluationModel.findOneAndUpdate(
       { projectId: req.params.projectId },
       {
-        $set: { ...req?.body, modification: date.format(now, "YYYY-MM-DD") },
+        $set: { ...req?.body, modification: date.format(now, "YYYY-MM-DD"),projectId : req.params.projectId },
       },
       {
         upsert: true,
