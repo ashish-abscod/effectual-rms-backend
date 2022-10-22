@@ -16,9 +16,6 @@ const CommentAttachmentSchema = new mongoose.Schema({
   files: {
     type: Array,
   },
-  fileNames:{
-   type:Array
-  },
   uploadedBy:{
     type:String
   },
