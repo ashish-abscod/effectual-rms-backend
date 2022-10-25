@@ -1,5 +1,4 @@
 const AssignedModel = require("../models/AssignedUsers.model");
-const usersModel = require("../models/User.model")
 
 exports.createAssignedUser = async (req, res) => {
   try{
