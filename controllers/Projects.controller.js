@@ -1,5 +1,6 @@
 const projectModel = require("../models/Projects.model.js");
 const projectSeriesModel = require("../models/ProjectSeries.model.js");
+const AssignedModel = require("../models/AssignedUsers.model");
 const date = require('date-and-time');
 
 exports.getProjects = async (req, res) => {
@@ -19,6 +20,20 @@ exports.getOneProject = async (req, res) => {
     res.send(error);
   }
 };
+
+exports.getProjectsAssignedToUser = async (req, res)=> {
+  try {
+    //finding those prjectsIds in which user is assigned with given userId
+    const data = await AssignedModel.find({"userId._id":req.params.userId}).select({projectId:1, _id:0});
+    //making array of projectIds to pass in $in
+    const projectIds = data?.map(item => item?.projectId);
+    //finding all projects with in array of project Ids.
+    const projects = await projectModel.find({projectId : {$in : projectIds}});
+    res.json(projects);
+  } catch (error) {
+    res.json({msg:"Something went wrong.", status:"failed"})
+  }
+}
 
 exports.findSearchObject = async (req, res) => {
   try {
