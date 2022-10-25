@@ -34,6 +34,19 @@ exports.getAssignedUser = async (req, res) => {
   }
 };
 
+exports.getAssignedUserToProject = async (req, res) => {
+  let item = await AssignedModel.find({ 
+    projectId: req.params.projectId,
+    $or: [{ userId: { _id: req.params.id } }],
+    role: { $in: ["Patent Expert", "Technical Expert"] } });
+    console.log(item);
+  if (item.length > 0) {
+    res.json({item:true});
+  } else {
+    res.send({ result: "data not found" });
+  }
+};
+
 exports.assignedUserGetById = async (req, resp) => {
   let result = await AssignedModel.findOne({ projectId: req.params.id });
   if (result) {
