@@ -1,24 +1,15 @@
 const AssignedModel = require("../models/AssignedUsers.model");
 
 exports.createAssignedUser = async (req, res) => {
-  try{
-    
-    const isExist = await AssignedModel.findOne({ userId: req.body.userId });
-    if (isExist) {
-      return res.json({
-        error: "User already assigned to the project",
-        data: null,
-        code: 400,
-      });
-    }
+  try {
     let newUser = new AssignedModel({
       userId: req.body.userId,
       projectId: req.body.projectId,
       assignedBy: req.body.assignedBy
     });
     let result = await newUser.save();
-    res.json({result,msg: "user is assigned to the project", status: "success"});
-  }catch(error){
+    res.json({ result, msg: "user is assigned to the project", status: "success" });
+  } catch (error) {
     res.json({ error, msg: "Sorry,user is not assigned to the project", status: "failed" });
   }
 
@@ -54,7 +45,7 @@ exports.updateAssignedUser = async (req, res) => {
   const result = await AssignedModel.findOneAndUpdate(
     { projectId: req.params.id },
 
-    { $push: { userId: {$each : req.body } }}
+    { $push: { userId: { $each: req.body } } }
   );
   res.send(result);
 };
