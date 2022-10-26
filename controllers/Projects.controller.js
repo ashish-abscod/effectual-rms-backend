@@ -84,7 +84,7 @@ exports.createProject = async (req, res) => {
       info: req.body.UsefulInformationForSearch,
       status: req.body.Status,
       projectManager: req.body.ProjectManager,
-      requestedDate: req.body.RequestedDate,
+      requestedDate: date.format(now,"YYYY-MM-DD HH:mm:ss"),
       createdById: req.body.CreatedById,
       completedDate: req.body.CompletedDate,
       jurisdiction: req.body.Jurisdiction,
@@ -96,6 +96,7 @@ exports.createProject = async (req, res) => {
       impClaim: req.body.ImportantClaims,
       nonImpClaim: req.body.UnimportantClaims,
     });
+    
     const info =await data.save();
     res.json({ ...info._doc, msg : "Project has been created Successfully!", status : "success" });
   } catch (error) {
@@ -120,7 +121,6 @@ exports.updateProject = async (req, res) => {
         info: req.body.UsefulInformationForSearch,
         status: req.body.Status,
         projectManager: req.body.ProjectManager,
-        requestedDate: req.body.RequestedDate,
         createdById: req.body.CreatedById,
         completedDate: req.body.CompletedDate,
         jurisdiction: req.body.Jurisdiction,
@@ -133,6 +133,7 @@ exports.updateProject = async (req, res) => {
         nonImpClaim: req.body.UnimportantClaims,
       }
     );
+    console.log(result);
     res.json({...result._doc, msg: "Project Successfully updated!", status : "success" });
   } catch (err) {
     res.json({ err, msg: "Sorry, could not update the project due to server issue!", status : "failed" });
