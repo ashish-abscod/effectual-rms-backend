@@ -1,5 +1,6 @@
 const projectModel = require("../models/Projects.model.js");
 const projectSeriesModel = require("../models/ProjectSeries.model.js");
+const AssignedModel = require("../models/AssignedUsers.model");
 const date = require('date-and-time');
 
 exports.getProjects = async (req, res) => {
@@ -19,6 +20,20 @@ exports.getOneProject = async (req, res) => {
     res.send(error);
   }
 };
+
+exports.getProjectsAssignedToUser = async (req, res)=> {
+  try {
+    //finding those prjectsIds in which user is assigned with given userId
+    const data = await AssignedModel.find({"userId._id":req.params.userId}).select({projectId:1, _id:0});
+    //making array of projectIds to pass in $in
+    const projectIds = data?.map(item => item?.projectId);
+    //finding all projects with in array of project Ids.
+    const projects = await projectModel.find({projectId : {$in : projectIds}});
+    res.json(projects);
+  } catch (error) {
+    res.json({msg:"Something went wrong.", status:"failed"})
+  }
+}
 
 exports.findSearchObject = async (req, res) => {
   try {
@@ -69,7 +84,7 @@ exports.createProject = async (req, res) => {
       info: req.body.UsefulInformationForSearch,
       status: req.body.Status,
       projectManager: req.body.ProjectManager,
-      requestedDate: req.body.RequestedDate,
+      requestedDate: date.format(now,"YYYY-MM-DD HH:mm:ss"),
       createdById: req.body.CreatedById,
       completedDate: req.body.CompletedDate,
       jurisdiction: req.body.Jurisdiction,
@@ -81,6 +96,7 @@ exports.createProject = async (req, res) => {
       impClaim: req.body.ImportantClaims,
       nonImpClaim: req.body.UnimportantClaims,
     });
+    
     const info =await data.save();
     res.json({ ...info._doc, msg : "Project has been created Successfully!", status : "success" });
   } catch (error) {
@@ -105,7 +121,6 @@ exports.updateProject = async (req, res) => {
         info: req.body.UsefulInformationForSearch,
         status: req.body.Status,
         projectManager: req.body.ProjectManager,
-        requestedDate: req.body.RequestedDate,
         createdById: req.body.CreatedById,
         completedDate: req.body.CompletedDate,
         jurisdiction: req.body.Jurisdiction,
@@ -118,6 +133,7 @@ exports.updateProject = async (req, res) => {
         nonImpClaim: req.body.UnimportantClaims,
       }
     );
+    console.log(result);
     res.json({...result._doc, msg: "Project Successfully updated!", status : "success" });
   } catch (err) {
     res.json({ err, msg: "Sorry, could not update the project due to server issue!", status : "failed" });
