@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const usersModel = require("../models/User.model");
+const bcrypt = require("bcryptjs")
 require("dotenv").config({ path: "../.env" });
 
 exports.signIn = async (req, res) => {
@@ -8,8 +9,13 @@ exports.signIn = async (req, res) => {
     if (!user)
       return res.status(400).json({ msg: "Invalid user email", status : "failed"});
 
-    if (user.password !== req.body.password)
-      return res.status(400).json({ msg: "Invalid Password", status :"failed" });
+      const comparePassword = await bcrypt.compare(
+        req.body.password,
+        user.password
+      );
+      if (!comparePassword)
+      return res.status(400).json({ error: "Invalid Password", status : "failed"});
+
 
     const token = await jwt.sign(
       { _id: user._id.toString() }, //payload

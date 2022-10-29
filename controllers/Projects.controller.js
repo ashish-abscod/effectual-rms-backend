@@ -82,7 +82,7 @@ exports.createProject = async (req, res) => {
       priorArtDate: req.body.PriorArtCuttOffDate,
       emailContent: req.body.emailContent,
       info: req.body.UsefulInformationForSearch,
-      status: req.body.Status,
+      status: req.body.status,
       projectManager: req.body.ProjectManager,
       requestedDate: date.format(now,"YYYY-MM-DD HH:mm:ss"),
       createdById: req.body.CreatedById,
@@ -96,8 +96,9 @@ exports.createProject = async (req, res) => {
       impClaim: req.body.ImportantClaims,
       nonImpClaim: req.body.UnimportantClaims,
     });
-    
+    console.log(data.status);
     const info =await data.save();
+    console.log(info);
     res.json({ ...info._doc, msg : "Project has been created Successfully!", status : "success" });
   } catch (error) {
     res.json({ msg: "Sorry, project could not be created due to server issue", success: "failed" });
@@ -119,7 +120,6 @@ exports.updateProject = async (req, res) => {
         priorArtDate: req.body.PriorArtCuttOffDate,
         emailContent: req.body.EmailContent,
         info: req.body.UsefulInformationForSearch,
-        status: req.body.Status,
         projectManager: req.body.ProjectManager,
         createdById: req.body.CreatedById,
         completedDate: req.body.CompletedDate,
