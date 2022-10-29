@@ -23,10 +23,7 @@ const userSchema = new mongoose.Schema({
   status: {
     type: Boolean,
     default: true,
-  },
-  picture: {
-    type: String,
-  },
+  }
 });
 
 //Export the model
