@@ -1,5 +1,6 @@
 const usersModel = require("../models/User.model");
 const {validateUser } = require("../utils/ValidateUser.utils");
+const bcrypt = require("bcryptjs")
 
 exports.createUser = async (req, res) => {
   try {
@@ -20,9 +21,9 @@ exports.createUser = async (req, res) => {
       role: req.body.role,
       status: req.body.status,
     });
-    // const salt = await bcrypt.genSalt();
-    // const hashedPssword = await bcrypt.hash(newUser.password, salt);
-    // newUser.password = hashedPssword;
+    const salt = await bcrypt.genSalt();
+    const hashedPssword = await bcrypt.hash(newUser.password, salt);
+    newUser.password = hashedPssword;
     await newUser.save();
     newUser.password = undefined;
     res.json({ newUser, msg: "User has been created successfully", status: "success" });
