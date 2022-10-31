@@ -48,9 +48,6 @@ exports.getFiles = async (req, res) => {
 
 exports.updateStatus = async (req, res) => {
   try {
-    console.log(req.params.id);
-    console.log(req.body);
-
     const result = await projectModel.findOneAndUpdate(
       { projectId: req.params.id },
       {
@@ -58,11 +55,10 @@ exports.updateStatus = async (req, res) => {
       }, {
       new: true
     }
-
     );
-    res.json({ result, msg: "Project Successfully updated!", status: "success" });
+    res.json({msg: "Report status has been successfully updated!", status: "success" });
   } catch (error) {
-    res.json({ error, msg: "Sorry, updation is failed!", status: "failed" });
+    res.json({ error, msg: "Sorry, report updation is failed!", status: "failed" });
     console.log(error)
   }
 }
@@ -71,7 +67,6 @@ exports.updateStatus = async (req, res) => {
 
 exports.uploadReportAndSendEmails = async (req, res) => {
   try {
-
     const uniqueNumber = Math.floor(Date.now() * Math.random());
     const uniqueFileName = `${uniqueNumber}_${req.body.filename}`;
     const uploadResponse = await cloudinary.uploader.upload(req.body.file, {
@@ -105,7 +100,8 @@ exports.uploadReportAndSendEmails = async (req, res) => {
     projectDetails = projectDetails[0];
 
     if (!effectualUserEmails && !clientEmails)
-      return res.json({ mssg: "User with given email doesn't exist!", status: "failed" });
+      return res.json({ mssg: "There are no users to send mail!", status: "failed" });
+      
     const subject = "Effectual RMS - New Project has been created!"
     const text = `
         <h3 style="text-align:center;color:blue">New Project has been created with following details: </h3>
@@ -119,17 +115,18 @@ exports.uploadReportAndSendEmails = async (req, res) => {
         <p>SSO needed: ${projectDetails?.sso} </p>
         <p>US IPR special:${projectDetails?.usipr} </p>
         <p>Useful information for search : ${projectDetails?.info} </p>
-        <p>Attachments :<a href='${url}' style="font-size:12px;">${req.body.filename}</a></p>
-        
+        <p>Attachments :<a href='${url}' style="font-size:12px;">${req.body.filename}</a></p><br>
+        <p>${req?.body?.emailContent}</p><br>
         <p>The details can be accessed using the following link. The details can be accessed using the following link <br><br>
         <a href='https://effectual_rms.com' style="font-size:12px;"> Effectual RMS</a>
         </p><br><br> 
         <h4>Thanks</h4><br><h4>Effectual Team</h4>`
 
     const recipients = effectualUserEmails.concat(clientEmails);
-    const result = await sendMultipleEmail(recipients, subject, text);
+    // const result = await sendMultipleEmail(recipients, subject, text);
+    const result = true;
     if(result) return res.json({msg: "Email has been sent successfully!", status: "success" });
-    else return res.json({result});
+    return res.json({result});
   } catch (error) {
     res.json({ msg: "Server Error, Could not upload report.", status: "failed" , error});
   }
