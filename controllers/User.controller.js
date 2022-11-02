@@ -42,6 +42,26 @@ exports.getUsers = async (req, res) => {
   }
 };
 
+
+exports.getEffectualUsers = async (req,res) => {
+  try {
+    const users = await usersModel.find({"role": {$in:["Effectual Admin", "Manager", "Searcher"]}});
+    if(users.length > 0) return res.json(users);
+    else return res.json({msg:"Not Users found", status:"success"});
+  } catch (error) {
+    res.json({msg:"Server Error, Something went wrong.", status: "failed"});
+  }
+}
+exports.getClientUsers = async (req,res) => {
+  try {
+    const users = await usersModel.find({"role": {$in:["Client Admin", "Patent Expert", "Technical Expert"]}});
+    if(users.length > 0) return res.json(users);
+    else return res.json({msg:"Not Users found", status:"success"});
+  } catch (error) {
+    res.json({msg:"Server Error, Something went wrong.", status: "failed"});
+  }
+}
+
 exports.getUsersById = async (req, res) => {
   const result = await usersModel.findOne({ _id: req.params.id });
   if (result) {
