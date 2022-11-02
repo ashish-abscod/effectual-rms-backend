@@ -5,7 +5,7 @@ const date = require('date-and-time');
 
 exports.getProjects = async (req, res) => {
   try {
-    const data = await projectModel.find().sort({"requestedDate":"desc"});
+    const data = await projectModel.find().sort({ "requestedDate": "desc" });
     res.json(data);
   } catch (e) {
     res.send("Error - " + e);
@@ -21,17 +21,17 @@ exports.getOneProject = async (req, res) => {
   }
 };
 
-exports.getProjectsAssignedToUser = async (req, res)=> {
+exports.getProjectsAssignedToUser = async (req, res) => {
   try {
     //finding those prjectsIds in which user is assigned with given userId
-    const data = await AssignedModel.find({"userId._id":req.params.userId}).select({projectId:1, _id:0});
+    const data = await AssignedModel.find({ "userId._id": req.params.userId }).select({ projectId: 1, _id: 0 });
     //making array of projectIds to pass in $in
     const projectIds = data?.map(item => item?.projectId);
     //finding all projects with in array of project Ids.
-    const projects = await projectModel.find({projectId : {$in : projectIds}});
+    const projects = await projectModel.find({ projectId: { $in: projectIds } });
     res.json(projects);
   } catch (error) {
-    res.json({msg:"Something went wrong.", status:"failed"})
+    res.json({ msg: "Something went wrong.", status: "failed" })
   }
 }
 
@@ -84,7 +84,7 @@ exports.createProject = async (req, res) => {
       info: req.body.UsefulInformationForSearch,
       status: "Progress",
       projectManager: req.body.ProjectManager,
-      requestedDate: date.format(now,"YYYY-MM-DD HH:mm:ss"),
+      requestedDate: date.format(now, "YYYY-MM-DD HH:mm:ss"),
       createdById: req.body.CreatedById,
       completedDate: req.body.CompletedDate,
       jurisdiction: req.body.Jurisdiction,
@@ -96,8 +96,8 @@ exports.createProject = async (req, res) => {
       impClaim: req.body.ImportantClaims,
       nonImpClaim: req.body.UnimportantClaims,
     });
-    const info =await data.save();
-    res.json({ ...info._doc, msg : "Project has been created Successfully!", status : "success" });
+    const info = await data.save();
+    res.json({ ...info._doc, msg: "Project has been created Successfully!", status: "success" });
   } catch (error) {
     res.json({ msg: "Sorry, project could not be created due to server issue", success: "failed" });
   }
@@ -131,8 +131,22 @@ exports.updateProject = async (req, res) => {
         nonImpClaim: req.body.UnimportantClaims,
       }
     );
-    res.json({...result._doc, msg: "Project Successfully updated!", status : "success" });
+    res.json({ ...result._doc, msg: "Project Successfully updated!", status: "success" });
   } catch (err) {
-    res.json({ err, msg: "Sorry, could not update the project due to server issue!", status : "failed" });
+    res.json({ err, msg: "Sorry, could not update the project due to server issue!", status: "failed" });
   }
 };
+
+
+exports.terminateProjectStatus = async (req, res) => {
+  try {
+    await projectModel.findOneAndUpdate(
+      { projectId: req.params.projectId },
+      {
+        status: "Terminated"
+      });
+    res.json({ msg: "Project has been successfully terminated.", status: "success" });
+  } catch (error) {
+    res.json({ error });
+  }
+}
