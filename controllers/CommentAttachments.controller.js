@@ -15,7 +15,11 @@ exports.createFile = async (req, res) => {
       resource_type: "auto",
       upload_preset: "attachments",
     });
-    const url = uploadResponse.secure_url;
+    let url = uploadResponse.secure_url;
+    //this below code will add a cloudinary flag=> fl_attachement for download the file instead of opening in web.
+    const index =  parseInt(url.indexOf('/upload/')) + 8;
+    url = url.slice(0, index) + 'fl_attachment/' + url.slice(index);
+    
     res.json({ url, msg: "File has been uploaded successfully", status: "success" });
   } catch (error) {
     res.json({ error, code: 500, msg: "Sorry, File uploadation is failed!", status: "failed" });
