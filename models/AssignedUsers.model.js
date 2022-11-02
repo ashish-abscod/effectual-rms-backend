@@ -8,6 +8,7 @@ const assignedSchema = new mongoose.Schema({
   },
   projectId: {
     type: String,
+    required : true
   },
   assignedBy: {
     type: String,

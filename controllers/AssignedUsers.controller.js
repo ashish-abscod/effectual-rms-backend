@@ -42,10 +42,17 @@ exports.removeAssignedUser = async (req, resp) => {
 };
 
 exports.updateAssignedUser = async (req, res) => {
+  //find document by projectId if found simply update the userId field,
+  //if document not found then save the all fields recieved in body.
   const result = await AssignedModel.findOneAndUpdate(
     { projectId: req.params.id },
 
-    { $push: { userId: { $each: req.body } } }
+    { $push: { userId: { $each: req.body.userId } }, assignedBy : req.body.assignedBy, projectId : req.body.projectId },
+    {
+      upsert: true,
+      new: true,
+      setDefaultsOnInsert: true,
+    }
   );
   res.send(result);
 };
