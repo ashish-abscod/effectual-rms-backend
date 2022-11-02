@@ -18,15 +18,11 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     role:"Manager"||"Patent Expert" || "Searcher" || "Client Admin" || "Effectual Admin" || "Technical Expert"
-    
   },
   status: {
     type: Boolean,
     default: true,
-  },
-  picture: {
-    type: String,
-  },
+  }
 });
 
 //Export the model

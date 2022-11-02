@@ -46,11 +46,11 @@ exports.getFilesOfEffectual = async (req, res) => {
   try {
 
     const commentEffectualAdmin = await commentAttachmentModel.
-      find({ projectId: req.params.projectId, role: { $in: ["Manager", "Effectual Admin"] } })
+      find({ projectId: req.params.projectId, role: { $in: ["Manager", "Effectual Admin","searcher"] } })
     const effectualAdmin = await attachmentModel.
-      find({ projectId: req.params.projectId, role: { $in: ["Manager", "Effectual Admin"] } })
+      find({ projectId: req.params.projectId, role: { $in: ["Manager", "Effectual Admin","searcher"] } })
     const replyEffectualAdmin = await replyAttachmentModel.
-      find({ projectId: req.params.projectId, role: { $in: ["Manager", "Effectual Admin"] } })
+      find({ projectId: req.params.projectId, role: { $in: ["Manager", "Effectual Admin","searcher"] } })
     const result = [].concat(commentEffectualAdmin, effectualAdmin, replyEffectualAdmin)
     res.json({ result })
   }
@@ -62,11 +62,11 @@ exports.getFilesOfEffectual = async (req, res) => {
 exports.getFilesOfClient = async (req, res) => {
   try {
     const commentEffectualClient = await commentAttachmentModel.
-      find({ projectId: req.params.projectId, role: { $in: ["Patent Expert", "Searcher", "Client Admin", "Technical Expert"] } })
+      find({ projectId: req.params.projectId, role: { $in: ["Patent Expert", "Client Admin", "Technical Expert"] } })
     const effectualClient = await attachmentModel.
-      find({ projectId: req.params.projectId, role: { $in: ["Patent Expert", "Searcher", "Client Admin", "Technical Expert"] } })
+      find({ projectId: req.params.projectId, role: { $in: ["Patent Expert", "Client Admin", "Technical Expert"] } })
     const replyEffectualClient = await replyAttachmentModel.
-      find({ projectId: req.params.projectId, role: { $in: ["Patent Expert", "Searcher", "Client Admin", "Technical Expert"] } })
+      find({ projectId: req.params.projectId, role: { $in: ["Patent Expert", "Client Admin", "Technical Expert"] } })
     const result = [].concat(commentEffectualClient, effectualClient, replyEffectualClient)
     res.json({ result })
   } catch (error) {

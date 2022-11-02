@@ -71,7 +71,6 @@ exports.SearchUser = async (req, res) => {
   res.send(result);
 };
 
-
 exports.updateUser = async (req, res) => {
   try {
     const { error } = validateUser(req.body);
@@ -86,3 +85,23 @@ exports.updateUser = async (req, res) => {
     res.json({ msg : "Sorry, we could not update your profile!", status: "failed" });
   }
 };
+
+
+exports.getEffectualUsers = async (req, res) => {
+  let item = await usersModel.find({role: { $in: ["Manager", "Effectual Admin","Searcher"] }});
+  if (item.length > 0) {
+    res.send(item);
+  } else {
+    res.send({ result: "Data not found!" });
+  }
+};
+
+
+exports.getHuaweiUsers = async (req,res)  => {
+  let item = await usersModel.find({role: { $in: ["Patent Expert", "Client Admin", "Technical Expert"] }});
+  if (item.length > 0) {
+    res.send(item);
+  } else {
+    res.send({ result: "Data not found!" });
+  }
+}

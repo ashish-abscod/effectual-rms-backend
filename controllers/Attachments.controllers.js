@@ -92,7 +92,7 @@ exports.uploadReportAndSendEmails = async (req, res) => {
     await add.save();
 
     //finding effecutal user email ids for sending mail
-    const effectualUser = await usersModel.find({ role: { $in: ["Effectual Admin"] } }, { email: 1, _id: 0 });
+    const effectualUser = await usersModel.find({ role: { $in: ["Effectual Admin","Manager"] } }, { email: 1, _id: 0 });
     const effectualUserEmails = effectualUser.map(item => item.email);
     
     //finding all user assigned in the project
