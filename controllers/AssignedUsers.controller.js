@@ -4,8 +4,7 @@ exports.createAssignedUser = async (req, res) => {
   try {
     let newUser = new AssignedModel({
       userId: req.body.userId,
-      projectId: req.body.projectId,
-      assignedBy: req.body.assignedBy
+      projectId: req.body.projectId
     });
     let result = await newUser.save();
     res.json({ result, msg: "user is assigned to the project", status: "success" });
@@ -47,7 +46,7 @@ exports.updateAssignedUser = async (req, res) => {
   const result = await AssignedModel.findOneAndUpdate(
     { projectId: req.params.id },
 
-    { $push: { userId: { $each: req.body.userId } }, assignedBy : req.body.assignedBy, projectId : req.body.projectId },
+    { $push: { userId: { $each: req.body.userId } }, projectId: req.body.projectId },
     {
       upsert: true,
       new: true,

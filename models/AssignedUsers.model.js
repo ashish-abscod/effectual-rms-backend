@@ -9,11 +9,7 @@ const assignedSchema = new mongoose.Schema({
   projectId: {
     type: String,
     required : true
-  },
-  assignedBy: {
-    type: String,
-    required: true,
-  },
+  }
 });
 
 //Export the model
