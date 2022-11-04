@@ -1,5 +1,6 @@
 const { cloudinary } = require("./Files.controller");
 const replyAttachmentModel = require("../models/ReplieAttachments.model");
+const replyAttachments = require('./reply_attachments.json');
 
 exports.createFile = async (req, res) => {
   try {
@@ -45,3 +46,31 @@ exports.getFiles = async (req, res) => {
   }
 }
 
+
+exports.migrateReplyAttachments = async (req, res) =>{
+  try {
+    const resultAttachments = replyAttachments.map( async (data)=>{
+  
+      const res = await replyAttachmentModel.findOneAndUpdate(
+        { projectId: data?.projectId},
+        { $push: { files: {url:data?.path, filename: data?.label} }, projectId: data?.projectId, uploadedBy : data?.username, createdAt:data?.uploaddate, replieId: data?.replyid},
+        {
+          upsert: true,
+          new: true,
+          setDefaultsOnInsert: true,
+        });
+  
+      return res;
+    })
+    
+    // let promiseArray;
+    const main = async () => {
+      const promiseArray = await Promise.all(resultAttachments);
+      res.json(promiseArray);
+    };
+    main();
+
+  } catch (error) {
+    res.send(error);
+  }
+}

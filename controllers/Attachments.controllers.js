@@ -4,6 +4,7 @@ const { sendMultipleEmail } = require('../utils/SendEmail');
 const usersModel = require("../models/User.model");
 const projectModel = require("../models/Projects.model")
 const assignedUserModel = require("../models/AssignedUsers.model")
+const attachmentsData = require('./file_attachments.json');
 
 exports.createFile = async (req, res) => {
   try {
@@ -19,9 +20,9 @@ exports.createFile = async (req, res) => {
     });
     let url = uploadResponse.secure_url;
     //this below code will add a cloudinary flag=> fl_attachement for download the file instead of opening in web.
-    const index =  parseInt(url.indexOf('/upload/')) + 8;
+    const index = parseInt(url.indexOf('/upload/')) + 8;
     url = url.slice(0, index) + 'fl_attachment/' + url.slice(index);
-    
+
     res.json({ url, msg: "File has been uploaded successfully!", status: "success" });
   } catch (error) {
     res.json({ error, msg: "Sorry, File uploadation is failed!", status: "failed" });
@@ -60,7 +61,7 @@ exports.updateStatus = async (req, res) => {
       new: true
     }
     );
-    res.json({msg: "Report status has been successfully updated!", status: "success" });
+    res.json({ msg: "Report status has been successfully updated!", status: "success" });
   } catch (error) {
     res.json({ error, msg: "Sorry, report updation is failed!", status: "failed" });
     console.log(error)
@@ -84,28 +85,28 @@ exports.uploadReportAndSendEmails = async (req, res) => {
     const url = uploadResponse.secure_url;
     let add = new AttachmentModel({
       files: url,
-      role : req.body.role,
-      uploadedBy : req.body.uploadedBy,
-      projectId : req.body.projectId
+      role: req.body.role,
+      uploadedBy: req.body.uploadedBy,
+      projectId: req.body.projectId
     });
     await add.save();
 
     //finding effecutal user email ids for sending mail
     const effectualUser = await usersModel.find({ role: { $in: ["Effectual Admin"] } }, { email: 1, _id: 0 });
     const effectualUserEmails = effectualUser.map(item => item.email);
-    
+
     //finding all user assigned in the project
     const assignedUser = await assignedUserModel.find({ projectId: req.body.projectId }, { userId: 1, _id: 0 });
     //extracting email ids of client users
     const clientEmails = assignedUser[0]?.userId.map(item => (item.email));
-    
+
     //finding all projectdetails with the projectId
     let projectDetails = await projectModel.find({ projectId: req.body.projectId });
     projectDetails = projectDetails[0];
 
     if (!effectualUserEmails && !clientEmails)
       return res.json({ mssg: "There are no users to send mail!", status: "failed" });
-      
+
     const subject = "Effectual RMS - New Project has been created!"
     const text = `
         <h3 style="text-align:center;color:blue">New Project has been created with following details: </h3>
@@ -129,9 +130,39 @@ exports.uploadReportAndSendEmails = async (req, res) => {
     const recipients = effectualUserEmails.concat(clientEmails);
     // const result = await sendMultipleEmail(recipients, subject, text);
     const result = true;
-    if(result) return res.json({msg: "Email has been sent successfully!", status: "success" });
-    return res.json({result});
+    if (result) return res.json({ msg: "Email has been sent successfully!", status: "success" });
+    return res.json({ result });
   } catch (error) {
-    res.json({ msg: "Server Error, Could not upload report.", status: "failed" , error});
+    res.json({ msg: "Server Error, Could not upload report.", status: "failed", error });
   }
+}
+
+
+exports.migrateAttachments = async (req, res) => {
+  try {
+    const resultAttachments = attachmentsData.map( async (data)=>{
+  
+      const res = await AttachmentModel.findOneAndUpdate(
+        { projectId: data?.projectId},
+        { $push: { files: data?.path }, projectId: data?.projectId, uploadedBy : data?.username, createdAt:data?.uploaddate },
+        {
+          upsert: true,
+          new: true,
+          setDefaultsOnInsert: true,
+        });
+  
+      return res;
+    })
+    
+    // let promiseArray;
+    const main = async () => {
+      const promiseArray = await Promise.all(resultAttachments);
+      res.json(promiseArray);
+    };
+    main();
+
+  } catch (error) {
+    res.send(error);
+  }
+
 }
