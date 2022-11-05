@@ -132,7 +132,7 @@ exports.uploadReportAndSendEmails = async (req, res) => {
     const recipients = effectualUserEmails.concat(clientEmails);
     // const result = await sendMultipleEmail(recipients, subject, text);
     const result = true;
-    if (result) return res.json({ msg: "Email has been sent successfully!", status: "success" });
+    if (result === true) return res.json({ msg: "Email has been sent successfully!", status: "success" });
     return res.json({ result });
   } catch (error) {
     res.json({ msg: "Server Error, Could not upload report.", status: "failed", error });

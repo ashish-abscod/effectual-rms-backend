@@ -40,7 +40,7 @@ exports.forgotPassword = async (req, res) => {
         <b>Thank you.</b><br><b>Team RMS</b>`
 
         const mssg = await sendEmail(user?.email, subject, text);
-        if (mssg)
+        if (mssg === true)
             return res.json({ mssg: "Email Successfully Sent . Kindly check your email inbox or spam folder to reset your password!", status: "success" });
         else
             return res.json({ mssg: "Sorry, Email could not sent due to server error!", status: "failed" });
