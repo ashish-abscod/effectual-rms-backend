@@ -19,6 +19,7 @@ const replyAttachment = require("./routes/ReplieAttachments.route");;
 const discussion = require("./routes/Discussion.route");
 const assignedUsers = require("./routes/AssignedUsers.route");
 const evaluation = require("./routes/Evaluation.route");
+const contactUs = require('./routes/ContactUs.route');
 
 //---------------Mongodb Connection -----------------
 mongoose.Promise = global.Promise;
@@ -63,6 +64,8 @@ app.use("/discussion", discussion);
 app.use("/assigned", assignedUsers);
 app.use("/evaluation",evaluation);
 app.use("/password",forgotPassword);
+app.use("/contactUs",contactUs)
+
 
 const Port = process.env.PORT || 8080;
 app.listen(Port, (err) => {
