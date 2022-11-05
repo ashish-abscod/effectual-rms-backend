@@ -1,6 +1,7 @@
 const { cloudinary } = require("./Files.controller");
 const replyAttachmentModel = require("../models/ReplieAttachments.model");
 const replyAttachments = require('./reply_attachments.json');
+const date = require('date-and-time');
 
 exports.createFile = async (req, res) => {
   try {
@@ -27,7 +28,8 @@ exports.createFile = async (req, res) => {
 
 exports.saveFile = async (req, res) => {
   try {
-    let add = new replyAttachmentModel(req.body);
+    const now = new Date();
+    let add = new replyAttachmentModel({...req.body, createdAt: date.format(now, "YYYY-MM-DD HH:mm:ss")});
     let result = await add.save();
     res.json({ result, status: "success" });
   }

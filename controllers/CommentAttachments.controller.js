@@ -3,6 +3,8 @@ const commentAttachmentModel = require("../models/CommentAttachments.model");
 const attachmentModel = require("../models/Attachments.model")
 const replyAttachmentModel = require("../models/ReplieAttachments.model")
 const commentAttachments = require('./comment_attachments.json');
+const date = require('date-and-time');
+
 
 exports.createFile = async (req, res) => {
   try {
@@ -29,7 +31,8 @@ exports.createFile = async (req, res) => {
 
 exports.saveFile = async (req, res) => {
   try {
-    let add = new commentAttachmentModel(req.body);
+    const now = new Date();
+    let add = new commentAttachmentModel({...req.body, createdAt: date.format(now, "YYYY-MM-DD HH:mm:ss")});
     let result = await add.save();
     res.send(result);
   } catch (error) {
